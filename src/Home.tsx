@@ -1,8 +1,8 @@
-import { Btn, Container } from 'roku-ui';
+import { Btn, Container, Footer } from 'roku-ui';
 export function Home() {
   return (
     <>
-      <div style={{ margin: '0rem 20rem', textAlign: 'center' }}>
+      <div style={{ margin: '0rem 20rem', textAlign: 'center', }}>
         <div style={{
           fontSize: '7rem',
           fontWeight: 'bold',
@@ -31,6 +31,9 @@ export function Home() {
       }}>
         {/* <LoginPanel /> */}
       </Container>
+      <Footer style={{ position: 'sticky', top: '100vh' }} >
+        Datreks @ {new Date().getFullYear()}
+      </Footer>
     </>
   );
 }
