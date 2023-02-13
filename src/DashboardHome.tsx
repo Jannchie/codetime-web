@@ -73,7 +73,7 @@ export function TokenPanel() {
         <>
           <div style={{fontSize: '1.5rem', fontWeight: 'bolder'}}>Upload Token</div>
           <Flex gap="1rem">
-            <TextField style={{width:'100%'}} defaultValue={user.data.upload_token} value={undefined} readOnly />
+            <TextField style={{ width: '100%', fontFamily: 'monospace'}} defaultValue={user.data.upload_token} value={undefined} readOnly />
             <Btn onClick={() => {
               navigator.clipboard.writeText(user.data.upload_token);
               pushNotice({
