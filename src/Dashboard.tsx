@@ -15,7 +15,7 @@ export function Dashboard() {
   return (
     <div className="App">
       <HolyGrail
-        header={<Appbar border varient='pattern' title="CodeTime" />}
+        header={<Appbar icon={<img width={20} src="/public/icon.svg" />} border varient='pattern' title="CodeTime" />}
         main={<Outlet />}
       />
     </div>
