@@ -2,7 +2,6 @@ import { Btn, Flex, MaterialSymbolIcon, pushNotice } from 'roku-ui';
 import { Avatar, Container, Panel, TextField, Typography } from 'roku-ui';
 import { useStats, useUserData, useUserDuration } from './api';
 
-
 function getTimestampList(minutes: number = 30) {
   const now = new Date();
 const timestampList = [];
@@ -37,8 +36,11 @@ export function UserPanel() {
           <Avatar src={user.data.avatar} />
           {user.data.username}
           <div>
-            Code today in {duration.data?.minutes} minutes.
+            Spent {duration.data?.minutes} minutes on coding in the last 24 hours.
           </div>
+          <div style={{
+            flexGrow: 1,
+          }}></div>
           <Flex gap={'0.25rem'}>
             {boolList.map((d, i) => (
               <div key={i} style={{ width: '0.3rem', height: '2rem', backgroundColor: d ? 'hsl(var(--r-primary-2))' : 'hsl(var(--r-default-2))' }}></div>
