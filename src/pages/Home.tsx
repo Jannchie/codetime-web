@@ -1,6 +1,8 @@
 import { type ReactNode, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Btn, Container, Footer, useTheme, Text } from 'roku-ui'
-import './styles/index.css'
+import { useUserData } from '../api'
+import '../styles/index.css'
 
 export function AwesomeText ({ children, colorStart, colorEnd }: { children?: ReactNode, colorStart: string, colorEnd: string }) {
   const [deg, setDeg] = useState(0)
@@ -24,6 +26,14 @@ export function AwesomeText ({ children, colorStart, colorEnd }: { children?: Re
 }
 export function Home () {
   const { theme } = useTheme()
+  const userRes = useUserData()
+  const nav = useNavigate()
+  useEffect(() => {
+    if (userRes.data) nav('/dashboard')
+  }, [nav, userRes.data])
+  if (userRes.isLoading) {
+    return <></>
+  }
   return (
     <>
       <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

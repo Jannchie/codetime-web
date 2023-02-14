@@ -1,9 +1,11 @@
 
 import { createBrowserRouter } from 'react-router-dom'
-import { Home } from './Home'
-import { Dashboard } from './Dashboard'
-import { DashboardHome } from './DashboardHome'
+import { Home } from './pages/Home'
+import { Dashboard } from './pages/dashboard/Dashboard'
+import { DashboardHome } from './pages/dashboard/DashboardHome'
 import { App } from './App'
+import { DashboardSettings } from './pages/dashboard/DashboardSettings'
+import { DashboardShields } from './pages/dashboard/DashboardShields'
 
 export const router = createBrowserRouter([
   {
@@ -15,11 +17,17 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: '/dashboard',
+        path: 'dashboard',
         element: <Dashboard />,
         children: [{
-          path: '/dashboard',
+          path: '',
           element: <DashboardHome />,
+        }, {
+          path: 'settings',
+          element: <DashboardSettings />,
+        }, {
+          path: 'shields',
+          element: <DashboardShields />,
         }],
       },
     ],

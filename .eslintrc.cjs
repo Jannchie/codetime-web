@@ -13,9 +13,6 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  plugins: [
-    'react',
-  ],
   rules: {
   },
 }
