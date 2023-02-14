@@ -30,12 +30,12 @@ export function Home () {
         <div style={{
           padding: '6rem 0rem 0rem 0rem',
         }}>
-          <AwesomeText colorStart="#D9AFD9" colorEnd="#F76B1C">
+          <AwesomeText colorStart="#DA4453" colorEnd="hsl(var(--r-background-3))">
             <Text weight="bold" size="xxl">
           Code.
             </Text>
           </AwesomeText>
-          <AwesomeText colorStart="#0093E9" colorEnd="#80D0C7">
+          <AwesomeText colorStart="hsl(var(--r-background-3))" colorEnd="#2980B9">
             <Text weight="bold" size="xxl">
             Time
             </Text>
