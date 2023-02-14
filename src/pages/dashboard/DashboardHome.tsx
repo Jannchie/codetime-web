@@ -27,7 +27,7 @@ export function UserTop ({
     max = data.data.reduce((a, b) => (a.minutes > b.minutes ? a : b)).minutes
   }
   return (
-    <Panel border style={{ padding: '1rem', flexGrow: 1 }}>
+    <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
         {capitalizeFirstLetter(field)}
       </div>
