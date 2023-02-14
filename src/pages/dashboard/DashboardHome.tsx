@@ -1,9 +1,11 @@
+import { useState } from 'react'
 import {
   Flex,
   Avatar,
   Container,
   Panel,
   Typography,
+  Btn,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
@@ -58,11 +60,11 @@ export function UserTop ({
   )
 }
 
-export function UserPanel () {
+export function UserPanel ({ minutes }: { minutes: number }) {
   const user = useUserData()
   const window = useWindowSize()
   const boolList = useBools(window.width < 1024 ? 30 : 60)
-  const duration = useUserDuration(1000 * 60 * 60 * 24)
+  const duration = useUserDuration(1000 * minutes * 60)
   return (
     <Panel border style={{ padding: '1rem' }}>
       {user.data && (
@@ -77,8 +79,7 @@ export function UserPanel () {
           </Flex>
           {duration.data && (
             <div style={{ flexGrow: 1 }}>
-              {getDurationText(duration.data.minutes * 60 * 1000)} in the last
-              24h.
+              {getDurationText(duration.data.minutes * 60 * 1000)} in the last { getDurationText(minutes * 60 * 1000)}.
             </div>
           )}
           <div style={{ flexGrow: 10 }} />
@@ -119,17 +120,25 @@ function useBools (minutes = 30) {
 }
 
 export function DashboardHome () {
+  const [days, setDays] = useState(1)
   return (
     <Container style={{ padding: '1rem' }}>
       <Typography.H1>Dashboard</Typography.H1>
       <Flex gap="1rem" direction="column">
-        <UserPanel />
+        <div>
+          <Btn.Group value={days} setValue={setDays}>
+            <Btn value={1}>Today</Btn>
+            <Btn value={7}>Week</Btn>
+            <Btn value={30}>30 Days</Btn>
+          </Btn.Group>
+        </div>
+        <UserPanel minutes={days * 24 * 60} />
         <Flex gap="1rem" direction={
           useWindowSize().width < 1024 ? 'column' : 'row'
         }>
-          <UserTop field="platform" />
-          <UserTop field="project" />
-          <UserTop field="language" />
+          <UserTop field="platform" minutes={days * 24 * 60} />
+          <UserTop field="project" minutes={days * 24 * 60} />
+          <UserTop field="language" minutes={days * 24 * 60}/>
         </Flex>
       </Flex>
     </Container>
