@@ -216,6 +216,8 @@ function ActivityChartPanel () {
         .draw({
           durationDays: 365,
         })
+      const svg = document.querySelector('#roku')?.querySelector('svg')
+      if (svg) { svg.style.float = 'right' }
       return () => {
         document.querySelector('#roku')?.childNodes.forEach((d) => { d.remove() })
       }
@@ -226,14 +228,20 @@ function ActivityChartPanel () {
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
       Recent Activity
       </div>
-      <Flex>
-        <div id="roku" />
-        <div style={{ width: '100%' }}>
-
+      <Flex style={{ position: 'relative' }} gap="1rem" direction={
+        useWindowSize().width < 1024 ? 'column' : 'row'
+      }>
+        <div style={{
+          maxWidth: 'calc(100vw - 4rem)',
+          overflow: 'hidden',
+        }} id="roku" />
+        <div style={{
+          flexGrow: 1,
+        }}>
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-            Most active day
+                Most active day
               </Text>
               <div>
                 {getDurationText(Math.max(...calData?.map(d => d.value) ?? []))}
@@ -241,7 +249,7 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-            Total
+                Total
               </Text>
               <div>
                 {getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0)}
@@ -249,7 +257,7 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-              Average
+                Average
               </Text>
               <div>
                 {getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0)}
@@ -260,7 +268,7 @@ function ActivityChartPanel () {
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-            Most streak
+                Most streak
               </Text>
               <div>
                 {calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? [])} Days
@@ -268,7 +276,7 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-            Current streak
+                Current streak
               </Text>
               <div>
                 {calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? [])} Days

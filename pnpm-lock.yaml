@@ -12,7 +12,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.8.1
-  roku-charts: ^0.1.1
+  roku-charts: ^0.1.3
   roku-ui: ^0.2.12
   sort-by: ^1.2.0
   swr: ^2.0.3
@@ -26,7 +26,7 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
-  roku-charts: 0.1.1_d3@7.8.2
+  roku-charts: 0.1.3_d3@7.8.2
   roku-ui: 0.2.12_biqbaboplfbrettd7655fr4n2y
   sort-by: 1.2.0
   swr: 2.0.3_react@18.2.0
@@ -2529,8 +2529,8 @@ packages:
     resolution: {integrity: sha512-ndEIpszUHiG4HtDsQLeIuMvRsDnn8c8rYStabochtUeCvfuvNptb5TUbVD68LRAILPX7p9nqQGh4xJgn3EHS/g==}
     dev: false
 
-  /roku-charts/0.1.1_d3@7.8.2:
-    resolution: {integrity: sha512-/Iy2I20D61ForMTfItQdRCAR0srCRzu8qqrmKrhKQDVA32U4E0x0a4T+u7BkSsJccv21p4FzY3cLJA0MiVarNg==}
+  /roku-charts/0.1.3_d3@7.8.2:
+    resolution: {integrity: sha512-Y3zgYxDqHWSpM64wf+O5yGiUNC5PjYm8B/hTUCPfmH73BkkJI/SStCnD2FHeLqY+PWm1zNOsfP0zvW3bhzGeQQ==}
     peerDependencies:
       d3: ^7.8.2
     dependencies:
