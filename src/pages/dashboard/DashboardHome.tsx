@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { RokuCal } from 'roku-charts'
 import {
   Flex,
   Avatar,
@@ -6,6 +7,7 @@ import {
   Panel,
   Typography,
   Btn,
+  Text,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
@@ -121,6 +123,7 @@ function useBools (minutes = 30) {
 
 export function DashboardHome () {
   const [days, setDays] = useState(1)
+
   return (
     <Container style={{ padding: '1rem' }}>
       <Typography.H1>Dashboard</Typography.H1>
@@ -140,7 +143,150 @@ export function DashboardHome () {
           <UserTop field="project" minutes={days * 24 * 60} />
           <UserTop field="language" minutes={days * 24 * 60}/>
         </Flex>
+        <Flex>
+          {ActivityChartPanel()}
+        </Flex>
       </Flex>
     </Container>
   )
+}
+
+function calculateStreak (dates: Date[]): number {
+  let currentStreak = 0
+  let longestStreak = 0
+  dates.sort((a, b) => a.getTime() - b.getTime())
+  for (let i = 0; i < dates.length; i++) {
+    if (i === 0 || dates[i].getTime() === dates[i - 1].getTime() + 24 * 60 * 60 * 1000) {
+      // If this is the first date in the list or the current date is one day after the previous date
+      currentStreak++
+    } else {
+      // Otherwise, the streak has been broken
+      longestStreak = Math.max(longestStreak, currentStreak)
+      currentStreak = 1
+    }
+  }
+
+  // Check if the last streak was the longest
+  longestStreak = Math.max(longestStreak, currentStreak)
+
+  return longestStreak
+}
+
+function calculateCurrentStreak (dates: Date[]): number {
+  let currentStreak = 0
+  dates.sort((a, b) => a.getTime() - b.getTime())
+
+  // Find the index of the last date in the array that is before today
+  let lastDateIndex = dates.length - 1
+  while (lastDateIndex >= 0 && dates[lastDateIndex].getTime() > new Date().getTime() + 86400000) {
+    lastDateIndex--
+  }
+
+  // Calculate the current streak by counting backwards from the last date before today
+  for (let i = lastDateIndex; i >= 0; i--) {
+    if (i === 0 || dates[i].getTime() === dates[i - 1].getTime() + 24 * 60 * 60 * 1000) {
+      // If this is the first date in the list or the current date is one day after the previous date
+      currentStreak++
+    } else {
+      // Otherwise, the streak has been broken
+      break
+    }
+  }
+
+  return currentStreak
+}
+
+function ActivityChartPanel () {
+  const data = useStats('days', 365 * 24 * 60)
+  const calData = data.data?.data.map(d => {
+    return {
+      date: d.time,
+      value: d.duration,
+    }
+  })
+  useEffect(() => {
+    if (calData) {
+      RokuCal
+        .New('#roku')
+        .setTheme({
+          nanFillColor: 'hsl(var(--r-background-1))',
+          visualMap: ['hsl(var(--r-primary-1))', 'hsl(var(--r-primary-2))', 'hsl(var(--r-primary-3))'],
+        })
+        .setData(calData)
+        .draw({
+          durationDays: 365,
+        })
+      const svg = document.querySelector('#roku')?.querySelector('svg')
+      if (svg) { svg.style.float = 'right' }
+      return () => {
+        document.querySelector('#roku')?.childNodes.forEach((d) => { d.remove() })
+      }
+    }
+  }, [calData])
+  return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
+    <Flex direction="column">
+      <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
+      Recent Activity
+      </div>
+      <Flex style={{ position: 'relative' }} gap="1rem" direction={
+        useWindowSize().width < 1024 ? 'column' : 'row'
+      }>
+        <div style={{
+          maxWidth: 'calc(100vw - 4rem)',
+          overflow: 'hidden',
+        }} id="roku" />
+        <div style={{
+          flexGrow: 1,
+        }}>
+          <Flex gap="1rem" style={{ width: '100%' }}>
+            <div style={{ flexGrow: 1, flexBasis: 0 }}>
+              <Text size="sm" className="text-primary-2">
+                Most active day
+              </Text>
+              <div>
+                {getDurationText(Math.max(...calData?.map(d => d.value) ?? []))}
+              </div>
+            </div>
+            <div style={{ flexGrow: 1, flexBasis: 0 }}>
+              <Text size="sm" className="text-primary-2">
+                Total
+              </Text>
+              <div>
+                {getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0)}
+              </div>
+            </div>
+            <div style={{ flexGrow: 1, flexBasis: 0 }}>
+              <Text size="sm" className="text-primary-2">
+                Average
+              </Text>
+              <div>
+                {getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0)}
+              </div>
+            </div>
+          </Flex>
+
+          <Flex gap="1rem" style={{ width: '100%' }}>
+            <div style={{ flexGrow: 1, flexBasis: 0 }}>
+              <Text size="sm" className="text-primary-2">
+                Most streak
+              </Text>
+              <div>
+                {calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? [])} Days
+              </div>
+            </div>
+            <div style={{ flexGrow: 1, flexBasis: 0 }}>
+              <Text size="sm" className="text-primary-2">
+                Current streak
+              </Text>
+              <div>
+                {calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? [])} Days
+              </div>
+            </div>
+            <div style={{ flexGrow: 1, flexBasis: 0 }} />
+          </Flex>
+
+        </div>
+      </Flex>
+    </Flex>
+  </Panel>
 }

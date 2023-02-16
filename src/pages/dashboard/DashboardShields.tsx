@@ -38,7 +38,7 @@ export function ShieldPanel ({ uid }: { uid: number }) {
     days: string
     style: string
     color: string
-  }>({ project: '', days: '', style: '', color: '' })
+  }>({ project: '', days: '', style: 'social', color: '' })
   let days = Number.parseInt(obj.days)
   if (isNaN(days)) days = 0
   const link = `https://img.shields.io/endpoint?style=${obj.style}${obj.color !== '' ? `&color=${obj.color}` : ''}&url=https%3A%2F%2Fapi.codetime.dev%2Fshield%3Fid%3D${uid}%26project%3D${obj.project}%26in%3D${days * 86400000}`
