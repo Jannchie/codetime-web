@@ -18,7 +18,7 @@ export function AwesomeText ({ children, colorStart, colorEnd }: { children?: Re
     <div className="gradient-text"
       style={{
         display: 'inline-block',
-        backgroundImage: `linear-gradient(${deg}deg, ${colorStart} 0%, ${colorEnd} 100%)`,
+        backgroundImage: `linear-gradient(${deg}deg, ${colorStart} 5%, ${colorEnd} 95%)`,
       }}>
       {children}
     </div>
@@ -40,12 +40,12 @@ export function Home () {
         <div style={{
           padding: '6rem 0rem 0rem 0rem',
         }}>
-          <AwesomeText colorStart="#DA4453" colorEnd="hsl(var(--r-background-3))">
+          <AwesomeText colorStart="#DA4453" colorEnd={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}>
             <Text weight="bold" size="xxl">
           Code.
             </Text>
           </AwesomeText>
-          <AwesomeText colorStart="hsl(var(--r-background-3))" colorEnd="#2980B9">
+          <AwesomeText colorStart={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'} colorEnd="#2980B9">
             <Text weight="bold" size="xxl">
             Time
             </Text>

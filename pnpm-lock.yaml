@@ -1,9 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@jannchie/eslint-config': ^1.0.3
+  '@jannchie/eslint-config': ^1.0.4
   '@types/react': ^18.0.28
-  '@types/react-dom': ^18.0.10
+  '@types/react-dom': ^18.0.11
   '@vitejs/plugin-react-swc': ^3.1.0
   eslint: ^8.34.0
   localforage: ^1.10.0
@@ -28,9 +28,9 @@ dependencies:
   swr: 2.0.3_react@18.2.0
 
 devDependencies:
-  '@jannchie/eslint-config': 1.0.3_7kw3g6rralp5ps6mg3uyzz6azm
+  '@jannchie/eslint-config': 1.0.4_7kw3g6rralp5ps6mg3uyzz6azm
   '@types/react': 18.0.28
-  '@types/react-dom': 18.0.10
+  '@types/react-dom': 18.0.11
   '@vitejs/plugin-react-swc': 3.1.0_vite@4.1.1
   eslint: 8.34.0
   typescript: 4.9.5
@@ -292,8 +292,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@jannchie/eslint-config/1.0.3_7kw3g6rralp5ps6mg3uyzz6azm:
-    resolution: {integrity: sha512-9O4cO/3jsDyAkd4dqpLGk40aPKMEYNqa2h58zzKED3JUfTVf5HhIg1mWYw9a474Um/glnNaApAMKWWSF5NNbww==}
+  /@jannchie/eslint-config/1.0.4_7kw3g6rralp5ps6mg3uyzz6azm:
+    resolution: {integrity: sha512-8nZfDVPKug+l795AwAlNBgdaBlO7l0f+mLpy7uVzzQPpt+rrkl2DE6VtlEVn7HSk5Cf7DuXrrNnwPZ+SRP4MTg==}
     peerDependencies:
       eslint: '>= 8'
     dependencies:
@@ -506,8 +506,8 @@ packages:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
     dev: true
 
-  /@types/react-dom/18.0.10:
-    resolution: {integrity: sha512-E42GW/JA4Qv15wQdqJq8DL4JhNpB3prJgjgapN3qJT9K2zO5IIAQh4VXvCEDupoqAwnz0cY4RlXeC/ajX5SFHg==}
+  /@types/react-dom/18.0.11:
+    resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
     dependencies:
       '@types/react': 18.0.28
     dev: true
@@ -842,7 +842,7 @@ packages:
     dev: true
 
   /concat-map/0.0.1:
-    resolution: {integrity: sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=}
+    resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
     dev: true
 
   /cross-spawn/7.0.3:
