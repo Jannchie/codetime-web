@@ -122,33 +122,37 @@ function useBools (minutes = 30) {
 }
 
 export function DashboardHome () {
-  const [days, setDays] = useState(1)
-
   return (
     <Container style={{ padding: '1rem' }}>
       <Typography.H1>Dashboard</Typography.H1>
-      <Flex>
-        <ActivityChartPanel />
-      </Flex>
       <Flex gap="1rem" direction="column">
-        <div>
-          <Btn.Group value={days} setValue={setDays}>
-            <Btn value={1}>Today</Btn>
-            <Btn value={7}>Week</Btn>
-            <Btn value={30}>30 Days</Btn>
-          </Btn.Group>
-        </div>
-        <UserPanel minutes={days * 24 * 60} />
-        <Flex gap="1rem" direction={
-          useWindowSize().width < 1024 ? 'column' : 'row'
-        }>
-          <UserTop field="platform" minutes={days * 24 * 60} />
-          <UserTop field="project" minutes={days * 24 * 60} />
-          <UserTop field="language" minutes={days * 24 * 60}/>
+        <Flex>
+          <ActivityChartPanel />
         </Flex>
       </Flex>
     </Container>
   )
+}
+
+export function DaysComponent () {
+  const [days, setDays] = useState(1)
+  return <>
+    <div>
+      <Btn.Group value={days} setValue={setDays}>
+        <Btn value={1}>Today</Btn>
+        <Btn value={7}>Week</Btn>
+        <Btn value={30}>30 Days</Btn>
+      </Btn.Group>
+    </div>
+    <UserPanel minutes={days * 24 * 60} />
+    <Flex gap="1rem" direction={
+      useWindowSize().width < 1024 ? 'column' : 'row'
+    }>
+      <UserTop field="platform" minutes={days * 24 * 60} />
+      <UserTop field="project" minutes={days * 24 * 60} />
+      <UserTop field="language" minutes={days * 24 * 60}/>
+    </Flex>
+  </>
 }
 
 function calculateStreak (dates: Date[]): number {
