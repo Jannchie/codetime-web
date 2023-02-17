@@ -127,6 +127,9 @@ export function DashboardHome () {
   return (
     <Container style={{ padding: '1rem' }}>
       <Typography.H1>Dashboard</Typography.H1>
+      <Flex>
+        <ActivityChartPanel />
+      </Flex>
       <Flex gap="1rem" direction="column">
         <div>
           <Btn.Group value={days} setValue={setDays}>
@@ -142,9 +145,6 @@ export function DashboardHome () {
           <UserTop field="platform" minutes={days * 24 * 60} />
           <UserTop field="project" minutes={days * 24 * 60} />
           <UserTop field="language" minutes={days * 24 * 60}/>
-        </Flex>
-        <Flex>
-          {ActivityChartPanel()}
         </Flex>
       </Flex>
     </Container>
@@ -210,7 +210,7 @@ function ActivityChartPanel () {
         .New('#roku')
         .setTheme({
           nanFillColor: 'hsl(var(--r-background-1))',
-          visualMap: ['hsl(var(--r-primary-1))', 'hsl(var(--r-primary-2))', 'hsl(var(--r-primary-3))'],
+          visualMap: ['hsl(var(--r-primary-3))', 'hsl(var(--r-primary-2))', 'hsl(var(--r-primary-1))'],
         })
         .setData(calData)
         .draw({
