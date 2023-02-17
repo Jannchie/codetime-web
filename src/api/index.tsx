@@ -4,7 +4,6 @@ const baseURL = import.meta.env.VITE_API_BASE_URL
 
 const entries = Object.entries(languageIdentifiers)
 const languageIdentifiersMap = new Map(entries)
-
 function useFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
   const finalURL = baseURL + url

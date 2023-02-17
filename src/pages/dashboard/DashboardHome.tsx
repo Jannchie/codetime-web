@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { RokuCal } from 'roku-charts'
 import {
   Flex,
-  Avatar,
   Container,
   Panel,
   Typography,
@@ -31,9 +30,9 @@ export function UserTop ({
   return (
     <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
-        {capitalizeFirstLetter(field)}
+        { capitalizeFirstLetter(field) }
       </div>
-      {data.data?.map((d) => (
+      { data.data?.map((d) => (
         <Flex
           key={d.field}
           direction="column"
@@ -43,8 +42,8 @@ export function UserTop ({
             gap="1rem"
             style={{ width: '100%', justifyContent: 'space-between' }}
           >
-            <div>{d.field}</div>
-            <div>{getDurationText(d.minutes * 60 * 1000)}</div>
+            <div>{ d.field }</div>
+            <div>{ getDurationText(d.minutes * 60 * 1000) }</div>
           </Flex>
           <div className="bg-background-3" style={{ borderRadius: '1px' }}>
             <div
@@ -57,7 +56,7 @@ export function UserTop ({
             />
           </div>
         </Flex>
-      ))}
+      )) }
     </Panel>
   )
 }
@@ -69,28 +68,24 @@ export function UserPanel ({ minutes }: { minutes: number }) {
   const duration = useUserDuration(1000 * minutes * 60)
   return (
     <Panel border style={{ padding: '1rem' }}>
-      {user.data && (
+      { user.data && (
         <Flex
           gap="1rem"
           align="center"
           direction={window.width <= 768 ? 'column' : 'row'}
         >
-          <Flex gap={'1rem'} align="center">
-            <Avatar src={user.data.avatar} />
-            {user.data.username}
-          </Flex>
-          {duration.data && (
+          { duration.data && (
             <div style={{ flexGrow: 1 }}>
-              {getDurationText(duration.data.minutes * 60 * 1000)} in the last { getDurationText(minutes * 60 * 1000)}.
+              { getDurationText(duration.data.minutes * 60 * 1000) }{ ' in the last ' }{ getDurationText(minutes * 60 * 1000) }{ '.\r' }
             </div>
-          )}
+          ) }
           <div style={{ flexGrow: 10 }} />
           <Flex
             justify={(window?.width ?? 1920) < 768 ? 'center' : 'end'}
             style={{ width: '100%', maxWidth: '600px', flexShrink: 10 }}
-            gap={'0.25rem'}
+            gap="0.25rem"
           >
-            {boolList.map((d, i) => (
+            { boolList.map((d, i) => (
               <div
                 key={i}
                 style={{
@@ -101,10 +96,10 @@ export function UserPanel ({ minutes }: { minutes: number }) {
                     : 'hsl(var(--r-default-2))',
                 }}
               />
-            ))}
+            )) }
           </Flex>
         </Flex>
-      )}
+      ) }
     </Panel>
   )
 }
@@ -124,7 +119,7 @@ function useBools (minutes = 30) {
 export function DashboardHome () {
   return (
     <Container style={{ padding: '1rem' }}>
-      <Typography.H1>Dashboard</Typography.H1>
+      <Typography.H1>{ 'Dashboard' }</Typography.H1>
       <Flex gap="1rem" direction="column">
         <ActivityChartPanel />
         <DaysComponent />
@@ -138,15 +133,13 @@ export function DaysComponent () {
   return <Flex direction="column" gap="1rem">
     <div>
       <Btn.Group value={days} setValue={setDays}>
-        <Btn value={1}>Today</Btn>
-        <Btn value={7}>Week</Btn>
-        <Btn value={30}>30 Days</Btn>
+        <Btn value={1}>{ 'Today' }</Btn>
+        <Btn value={7}>{ 'Week' }</Btn>
+        <Btn value={30}>{ '30 Days' }</Btn>
       </Btn.Group>
     </div>
     <UserPanel minutes={days * 24 * 60} />
-    <Flex gap="1rem" direction={
-      useWindowSize().width < 1024 ? 'column' : 'row'
-    }>
+    <Flex gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
       <UserTop field="platform" minutes={days * 24 * 60} />
       <UserTop field="project" minutes={days * 24 * 60} />
       <UserTop field="language" minutes={days * 24 * 60}/>
@@ -229,11 +222,9 @@ function ActivityChartPanel () {
   return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
     <Flex direction="column">
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
-      Recent Activity
+        { 'Recent Activity\r' }
       </div>
-      <Flex style={{ position: 'relative' }} gap="1rem" direction={
-        useWindowSize().width < 1024 ? 'column' : 'row'
-      }>
+      <Flex style={{ position: 'relative' }} gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
         <div style={{
           maxWidth: 'calc(100vw - 4rem)',
           overflow: 'hidden',
@@ -244,26 +235,26 @@ function ActivityChartPanel () {
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                Most active day
+                { 'Most active day\r' }
               </Text>
               <div>
-                {getDurationText(Math.max(...calData?.map(d => d.value) ?? []))}
+                { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                Total
+                { 'Total\r' }
               </Text>
               <div>
-                {getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0)}
+                { getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                Average
+                { 'Average\r' }
               </Text>
               <div>
-                {getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0)}
+                { getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
               </div>
             </div>
           </Flex>
@@ -271,18 +262,18 @@ function ActivityChartPanel () {
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                Most streak
+                { 'Most streak\r' }
               </Text>
               <div>
-                {calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? [])} Days
+                { calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) } { 'Days\r' }
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                Current streak
+                { 'Current streak\r' }
               </Text>
               <div>
-                {calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? [])} Days
+                { calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) } { 'Days\r' }
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }} />

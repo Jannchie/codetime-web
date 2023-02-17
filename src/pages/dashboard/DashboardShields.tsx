@@ -27,7 +27,7 @@ export function ClipableTextField ({ text }: { text: string }) {
       })
       void navigator.clipboard.writeText(text)
     }}>
-      <MaterialSymbolIcon icon="cut" style={{ marginRight: '0.25rem' }}/> Copy
+      <MaterialSymbolIcon icon="cut" style={{ marginRight: '0.25rem' }}/> { 'Copy' }
     </Btn>
   </Flex>
 }
@@ -46,16 +46,14 @@ export function ShieldPanel ({ uid }: { uid: number }) {
     <Flex direction="column" gap="1rem">
       <img alt="shield" src={link} />
       <Flex align="center" gap="1rem">
-        <span style={{ minWidth: '90px' }}>Markdown</span>
+        <span style={{ minWidth: '90px' }}>{ 'Markdown' }</span>
         <ClipableTextField text={`[![CodeTime badge](${link})](https://codetime.dev)`} />
       </Flex>
       <Flex align="center" gap="1rem">
-        <span style={{ minWidth: '90px' }}>HTML</span>
+        <span style={{ minWidth: '90px' }}>{ 'HTML' }</span>
         <ClipableTextField text={`<img href="https://codetime.dev" alt="Custom badge" src="${link}">`} />
       </Flex>
-      <Flex gap="1rem" direction={
-        useWindowSize().width < 600 ? 'column' : 'row'
-      }>
+      <Flex gap="1rem" direction={useWindowSize().width < 600 ? 'column' : 'row'}>
         <TextField style={{ flexGrow: 1 }} value={obj.project} setValue={(v) => { setObj({ ...obj, project: v }) }} placeholder="Project" />
         <TextField style={{ flexGrow: 1 }} value={obj.days} setValue={(v) => { setObj({ ...obj, days: v }) }} placeholder="Days" />
         <TextField style={{ flexGrow: 1 }} value={obj.style} setValue={(v) => { setObj({ ...obj, style: v }) }} placeholder="Style" />
@@ -70,9 +68,9 @@ export function DashboardShields () {
   const uid = user.data?.id
   return (
     <Container style={{ padding: '1rem' }}>
-      <Typography.H1>Shields</Typography.H1>
+      <Typography.H1>{ 'Shields' }</Typography.H1>
       <Flex gap="1rem" direction="column" >
-        {uid && <ShieldPanel uid={uid} />}
+        { uid && <ShieldPanel uid={uid} /> }
       </Flex>
     </Container>
   )
