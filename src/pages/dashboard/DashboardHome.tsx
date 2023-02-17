@@ -126,9 +126,8 @@ export function DashboardHome () {
     <Container style={{ padding: '1rem' }}>
       <Typography.H1>Dashboard</Typography.H1>
       <Flex gap="1rem" direction="column">
-        <Flex>
-          <ActivityChartPanel />
-        </Flex>
+        <ActivityChartPanel />
+        <DaysComponent />
       </Flex>
     </Container>
   )
@@ -136,7 +135,7 @@ export function DashboardHome () {
 
 export function DaysComponent () {
   const [days, setDays] = useState(1)
-  return <>
+  return <Flex direction="column" gap="1rem">
     <div>
       <Btn.Group value={days} setValue={setDays}>
         <Btn value={1}>Today</Btn>
@@ -152,7 +151,7 @@ export function DaysComponent () {
       <UserTop field="project" minutes={days * 24 * 60} />
       <UserTop field="language" minutes={days * 24 * 60}/>
     </Flex>
-  </>
+  </Flex>
 }
 
 function calculateStreak (dates: Date[]): number {
