@@ -19,8 +19,8 @@ export function Dashboard () {
   const user = useUserData()
   const nav = useNavigate()
   useEffect(() => {
-    if (!user.data) nav('/')
-  }, [nav, user.data])
+    if (!user.data && !user.isLoading) nav('/')
+  }, [nav, user.data, user.isLoading])
   return (
     <div className="App">
       <HolyGrail
