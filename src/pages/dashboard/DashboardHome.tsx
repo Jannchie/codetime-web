@@ -7,12 +7,13 @@ import {
   Typography,
   Btn,
   Text,
+  useTheme,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
 import { getDurationText } from '../../utils/getDurationText'
 import { getTimestampList, useWindowSize } from '../../utils/getTimestampList'
-
+import * as d3 from 'd3'
 export function UserTop ({
   field,
   minutes = 60 * 24,
@@ -193,6 +194,7 @@ function calculateCurrentStreak (dates: Date[]): number {
 }
 
 function ActivityChartPanel () {
+  const { theme } = useTheme()
   const data = useStats('days', 365 * 24 * 60)
   const calData = data.data?.data.map(d => {
     return {
@@ -206,11 +208,14 @@ function ActivityChartPanel () {
         .New('#roku')
         .setTheme({
           nanFillColor: 'hsl(var(--r-background-1))',
-          visualMap: ['hsl(var(--r-primary-3))', 'hsl(var(--r-primary-2))', 'hsl(var(--r-primary-1))'],
+          visualMap: theme === 'light' ? d3.schemeBlues[6].slice(1) : d3.schemeBlues[6].slice(2, 6).reverse(),
         })
         .setData(calData)
         .draw({
           durationDays: 365,
+          tooltipFormatter: (d) => {
+            return `<b>${d.date}</b> </br> ${d.value ? getDurationText(d.value) : 'N/A'}`
+          },
         })
       const svg = document.querySelector('#roku')?.querySelector('svg')
       if (svg) { svg.style.float = 'right' }
@@ -222,11 +227,11 @@ function ActivityChartPanel () {
   return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
     <Flex direction="column">
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
-        { 'Recent Activity\r' }
+        { 'Recent Activity' }
       </div>
       <Flex style={{ position: 'relative' }} gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
         <div style={{
-          maxWidth: 'calc(100vw - 4rem)',
+          maxWidth: 'calc(100vw - 4rem - 2px)',
           overflow: 'hidden',
         }} id="roku" />
         <div style={{
@@ -235,7 +240,7 @@ function ActivityChartPanel () {
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                { 'Most active day\r' }
+                { 'Most day' }
               </Text>
               <div>
                 { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }

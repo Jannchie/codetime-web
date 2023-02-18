@@ -34,7 +34,7 @@ export function Dashboard () {
         />}
         main={<>
           <Flex justify="center">
-            <Panel style={{ marginTop: '1rem', borderRadius: '999px', lineHeight: 0 }}>
+            <Panel border style={{ marginTop: '1rem', borderRadius: '999px', lineHeight: 0 }}>
               <Flex >
                 {
                   [

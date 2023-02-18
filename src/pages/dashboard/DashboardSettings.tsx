@@ -8,6 +8,7 @@ import {
   Btn,
   MaterialSymbolIcon,
   Anchor,
+  useTheme,
 } from 'roku-ui'
 import { useUserData } from '../../api'
 
@@ -53,12 +54,32 @@ export function TokenPanel () {
   )
 }
 
+export function ThemePanel () {
+  const { theme, setTheme } = useTheme()
+  return (
+    <Panel border style={{ padding: '1rem' }}>
+      <>
+        <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
+          { 'Theme' }
+        </div>
+        <Flex gap="1rem">
+          <Btn.Group value={theme} setValue={setTheme}>
+            <Btn value="dark" >{ 'Dark ' }</Btn>
+            <Btn value="light" >{ 'Light ' }</Btn>
+          </Btn.Group>
+        </Flex>
+      </>
+    </Panel>
+  )
+}
+
 export function DashboardSettings () {
   return (
     <Container style={{ padding: '1rem' }}>
       <Typography.H1>{ 'Settings' }</Typography.H1>
       <Flex gap="1rem" direction="column" >
         <TokenPanel />
+        <ThemePanel />
       </Flex>
     </Container>
   )
