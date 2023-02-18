@@ -223,7 +223,7 @@ function ActivityChartPanel () {
         document.querySelector('#roku')?.childNodes.forEach((d) => { d.remove() })
       }
     }
-  }, [calData])
+  }, [calData, theme])
   return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
     <Flex direction="column">
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
