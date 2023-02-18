@@ -14,6 +14,13 @@ function useFetch<D> (url: string, options: RequestInit = {}) {
       throw new Error(data.error)
     }
     return data
+  }, {
+    onErrorRetry: (error, key, __, revalidate, { retryCount }) => {
+      if (key === finalURL) return
+      if (retryCount >= 3) return
+      if (error instanceof Error && error.message === 'Unauthorized') return
+      setTimeout(() => revalidate({ retryCount }), 15000)
+    },
   })
   return res
 }

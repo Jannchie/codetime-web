@@ -14,7 +14,7 @@ specifiers:
   react-dom: ^18.2.0
   react-router-dom: ^6.8.1
   roku-charts: ^0.2.0
-  roku-ui: ^0.2.12
+  roku-ui: ^0.3.0
   sort-by: ^1.2.0
   swr: ^2.0.3
   typescript: ^4.9.5
@@ -28,7 +28,7 @@ dependencies:
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
   roku-charts: 0.2.0_d3@7.8.2
-  roku-ui: 0.2.12_biqbaboplfbrettd7655fr4n2y
+  roku-ui: 0.3.0_biqbaboplfbrettd7655fr4n2y
   sort-by: 1.2.0
   swr: 2.0.3_react@18.2.0
 
@@ -857,8 +857,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@unocss/reset/0.49.6:
-    resolution: {integrity: sha512-O3+c6WxruR6GqCtfAtE70pZiUmewabuqOOnGDFZFHX04Vb/aWL6kvBFBGQmuMgmK1ziOkkkCqAzSpw8U9p+cOg==}
+  /@unocss/reset/0.49.7:
+    resolution: {integrity: sha512-dodJ+4LLyBJVLNZZyZNGRnEF/Sepb2n4q+JC+TZ1SjxGpiYGxeDvPFw9kE1M7DZ0XshWE+j31HhojQXc1GDsBA==}
     dev: false
 
   /@vitejs/plugin-react-swc/3.1.0_vite@4.1.2:
@@ -2723,13 +2723,13 @@ packages:
       d3: 7.8.2
     dev: false
 
-  /roku-ui/0.2.12_biqbaboplfbrettd7655fr4n2y:
-    resolution: {integrity: sha512-8Q70Ob53oNeSAvISAd/VgnHomD4Z/2THG5xuUPScroa1xn6DssWUNghq4k2OiBK26nPTMQDaXty3eV7EmjHfcQ==}
+  /roku-ui/0.3.0_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-Rz88axTAvG1kPbP2a8HjJEo0BUomviWZWaX4/V/xbcKS7eTSB3f0xBLRX0ub87RWBK9fJ8viA6RQ9txQMig2dg==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@unocss/reset': 0.49.6
+      '@unocss/reset': 0.49.7
       classnames: 2.3.2
       d3-color: 3.1.0
       framer-motion: 9.0.4_biqbaboplfbrettd7655fr4n2y
@@ -2737,8 +2737,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /rollup/3.16.0:
-    resolution: {integrity: sha512-9wE1H5N1SJqnROpQanBGJ7lrIitwlUYGj4Va4eyf3+vNhoIHLPLag2/CUGIiq3V9lHOBJB6zTsGsPvc50oeihg==}
+  /rollup/3.17.0:
+    resolution: {integrity: sha512-0zZQ0J4p0ZtTla6l8sheDTUyNfGZQDpU5h0nPHf6xtUXIzKK70LmB2IRR0wLnzaL8a02fjmsJy+XCncbSwOpjg==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -3012,7 +3012,7 @@ packages:
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.16.0
+      rollup: 3.17.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

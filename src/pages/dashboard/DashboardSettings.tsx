@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   Flex,
   Container,
@@ -14,6 +15,7 @@ import { useUserData } from '../../api'
 
 export function TokenPanel () {
   const user = useUserData()
+  const [hover, setHover] = useState(false)
   return (
     <Panel border style={{ padding: '1rem' }}>
       { user.data && (
@@ -24,9 +26,12 @@ export function TokenPanel () {
           <Flex gap="1rem">
             <TextField
               readOnly
+              type={!hover ? 'password' : 'text'}
               style={{ width: '100%', fontFamily: 'monospace' }}
               defaultValue={user.data.upload_token}
               value={undefined}
+              onMouseEnter={() => { setHover(true) }}
+              onMouseLeave={() => { setHover(false) }}
             />
             <Btn
               onClick={() => {
