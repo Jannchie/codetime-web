@@ -1,11 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@jannchie/eslint-config': ^1.0.5
+  '@jannchie/eslint-config': ^1.1.0
   '@types/d3': ^7.4.0
   '@types/react': ^18.0.28
   '@types/react-dom': ^18.0.11
-  '@vitejs/plugin-react-swc': ^3.1.0
+  '@vitejs/plugin-react-swc': ^3.2.0
   d3: ^7.8.2
   eslint: ^8.34.0
   localforage: ^1.10.0
@@ -13,7 +13,7 @@ specifiers:
   react: ^18.2.0
   react-dom: ^18.2.0
   react-router-dom: ^6.8.1
-  roku-charts: ^0.2.0
+  roku-charts: ^0.3.0
   roku-ui: ^0.3.0
   sort-by: ^1.2.0
   swr: ^2.0.3
@@ -27,17 +27,17 @@ dependencies:
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-router-dom: 6.8.1_biqbaboplfbrettd7655fr4n2y
-  roku-charts: 0.2.0_d3@7.8.2
+  roku-charts: 0.3.0_d3@7.8.2
   roku-ui: 0.3.0_biqbaboplfbrettd7655fr4n2y
   sort-by: 1.2.0
   swr: 2.0.3_react@18.2.0
 
 devDependencies:
-  '@jannchie/eslint-config': 1.0.5_7kw3g6rralp5ps6mg3uyzz6azm
+  '@jannchie/eslint-config': 1.1.0_7kw3g6rralp5ps6mg3uyzz6azm
   '@types/d3': 7.4.0
   '@types/react': 18.0.28
   '@types/react-dom': 18.0.11
-  '@vitejs/plugin-react-swc': 3.1.0_vite@4.1.2
+  '@vitejs/plugin-react-swc': 3.2.0_vite@4.1.2
   eslint: 8.34.0
   typescript: 4.9.5
   vite: 4.1.2
@@ -308,8 +308,8 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@jannchie/eslint-config/1.0.5_7kw3g6rralp5ps6mg3uyzz6azm:
-    resolution: {integrity: sha512-R+4MHflBkd176As4kYOqAuIDywiWq9pxlQzWSfA9xlX1pQZkjbL50Ch1r2efLBCTFQBHoY8qk9t0wL20TWbNVw==}
+  /@jannchie/eslint-config/1.1.0_7kw3g6rralp5ps6mg3uyzz6azm:
+    resolution: {integrity: sha512-x3lQH5e2eZR7U4H/h86kFnwDea58ciNhgjwierP0jTIjHK2fMIPTxu2lcO2jxsB9WY6fQFFFOlw2Bgby1dj0ng==}
     peerDependencies:
       eslint: '>= 8'
     dependencies:
@@ -861,8 +861,8 @@ packages:
     resolution: {integrity: sha512-dodJ+4LLyBJVLNZZyZNGRnEF/Sepb2n4q+JC+TZ1SjxGpiYGxeDvPFw9kE1M7DZ0XshWE+j31HhojQXc1GDsBA==}
     dev: false
 
-  /@vitejs/plugin-react-swc/3.1.0_vite@4.1.2:
-    resolution: {integrity: sha512-xnDULNrkEbtTtRNnMPp+RsuIuIbk1JJV0xY7irchYyv9JJS4uvmc1EYip+qyrnkcX7TQ9c8vCS3AmkQqADI0Fw==}
+  /@vitejs/plugin-react-swc/3.2.0_vite@4.1.2:
+    resolution: {integrity: sha512-IcBoXL/mcH7JdQr/nfDlDwTdIaH8Rg7LpfQDF4nAht+juHWIuv6WhpKPCSfY4+zztAaB07qdBoFz1XCZsgo3pQ==}
     peerDependencies:
       vite: ^4
     dependencies:
@@ -2714,8 +2714,8 @@ packages:
     resolution: {integrity: sha512-ndEIpszUHiG4HtDsQLeIuMvRsDnn8c8rYStabochtUeCvfuvNptb5TUbVD68LRAILPX7p9nqQGh4xJgn3EHS/g==}
     dev: false
 
-  /roku-charts/0.2.0_d3@7.8.2:
-    resolution: {integrity: sha512-R7nPGiFtYOaAVNvYxU3nVunpX5Nv+OA6TQGU3fAsMxGU2NdXjhvUQVDfzA2kkT5HF3jsAcWhUunBZS6eXUIAzg==}
+  /roku-charts/0.3.0_d3@7.8.2:
+    resolution: {integrity: sha512-06+Y9b1rcNknQLJR74X96SJ0b4cH2jvvdQU8QNnV/qp0OI9MWPSKxP+7NYuig/SAhhE0qGNuRUZEyNA20abjOA==}
     peerDependencies:
       d3: ^7.8.2
     dependencies:
@@ -2737,8 +2737,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /rollup/3.17.0:
-    resolution: {integrity: sha512-0zZQ0J4p0ZtTla6l8sheDTUyNfGZQDpU5h0nPHf6xtUXIzKK70LmB2IRR0wLnzaL8a02fjmsJy+XCncbSwOpjg==}
+  /rollup/3.17.1:
+    resolution: {integrity: sha512-8RnSms6rNqHmZK+wiqgnPCqen+rRnUHXkciGDirh7B00g1rX1vpKbPDhuxCvAG2bburoI+W4Q9/PlUB/zYkiYA==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -3012,7 +3012,7 @@ packages:
       esbuild: 0.16.17
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.17.0
+      rollup: 3.17.1
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

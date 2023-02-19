@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { RokuCal } from 'roku-charts'
+import { useEffect, useRef, useState } from 'react'
+import { RokuCal, type RokuChart } from 'roku-charts'
 import {
   Flex,
   Container,
@@ -14,6 +14,8 @@ import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
 import { getDurationText } from '../../utils/getDurationText'
 import { getTimestampList, useWindowSize } from '../../utils/getTimestampList'
 import * as d3 from 'd3'
+import { type Theme } from 'roku-charts/dist/types/themes'
+import { type CalData } from 'roku-charts/dist/types/configs'
 export function UserTop ({
   field,
   minutes = 60 * 24,
@@ -193,6 +195,35 @@ function calculateCurrentStreak (dates: Date[]): number {
   return currentStreak
 }
 
+function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
+  const chart = useRef<RokuChart<CalData, any>>()
+  useEffect(() => {
+    if (data) {
+      if (!chart.current) {
+        chart.current = RokuCal
+          .New('#roku')
+          .setTheme({
+            nanFillColor: 'hsl(var(--r-background-1))',
+            visualMap: theme === 'light' ? d3.schemeBlues[6].slice(1) : d3.schemeBlues[6].slice(2, 6).reverse(),
+          })
+          .setData(data as any)
+      }
+      chart.current.draw({
+        durationDays: 365,
+        tooltipFormatter: (d: CalData) => {
+          return `<b>${d.date}</b> </br> ${d.value ? getDurationText(d.value) : getDurationText(0)}`
+        },
+      })
+      const svg = document.querySelector('#roku')?.querySelector('svg')
+      if (svg) { svg.style.float = 'right' }
+    }
+  }, [data, theme])
+  return <div style={{
+    maxWidth: 'calc(100vw - 4rem - 2px)',
+    overflow: 'hidden',
+  }} id="roku" />
+}
+
 function ActivityChartPanel () {
   const { theme } = useTheme()
   const data = useStats('days', 365 * 24 * 60)
@@ -202,38 +233,14 @@ function ActivityChartPanel () {
       value: d.duration,
     }
   })
-  useEffect(() => {
-    if (calData) {
-      RokuCal
-        .New('#roku')
-        .setTheme({
-          nanFillColor: 'hsl(var(--r-background-1))',
-          visualMap: theme === 'light' ? d3.schemeBlues[6].slice(1) : d3.schemeBlues[6].slice(2, 6).reverse(),
-        })
-        .setData(calData)
-        .draw({
-          durationDays: 365,
-          tooltipFormatter: (d) => {
-            return `<b>${d.date}</b> </br> ${d.value ? getDurationText(d.value) : 'N/A'}`
-          },
-        })
-      const svg = document.querySelector('#roku')?.querySelector('svg')
-      if (svg) { svg.style.float = 'right' }
-      return () => {
-        document.querySelector('#roku')?.childNodes.forEach((d) => { d.remove() })
-      }
-    }
-  }, [calData, theme])
+
   return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
     <Flex direction="column">
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
         { 'Recent Activity' }
       </div>
       <Flex style={{ position: 'relative' }} gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
-        <div style={{
-          maxWidth: 'calc(100vw - 4rem - 2px)',
-          overflow: 'hidden',
-        }} id="roku" />
+        <CalChartComp data={calData} theme={theme} />
         <div style={{
           flexGrow: 1,
         }}>
