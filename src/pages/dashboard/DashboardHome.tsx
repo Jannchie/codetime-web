@@ -14,7 +14,6 @@ import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
 import { getDurationText } from '../../utils/getDurationText'
 import { getTimestampList, useWindowSize } from '../../utils/getTimestampList'
 import * as d3 from 'd3'
-import { type Theme } from 'roku-charts/dist/types/themes'
 import { type CalData } from 'roku-charts/dist/types/configs'
 export function UserTop ({
   field,
@@ -240,7 +239,7 @@ function ActivityChartPanel () {
         { 'Recent Activity' }
       </div>
       <Flex style={{ position: 'relative' }} gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
-        <CalChartComp data={calData} theme={theme} />
+        <CalChartComp data={calData as any} theme={theme} />
         <div style={{
           flexGrow: 1,
         }}>
