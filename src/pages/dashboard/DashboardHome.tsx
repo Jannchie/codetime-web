@@ -8,6 +8,8 @@ import {
   Btn,
   Text,
   useTheme,
+  Notice,
+  MaterialSymbolIcon,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
@@ -119,8 +121,13 @@ function useBools (minutes = 30) {
 }
 
 export function DashboardHome () {
+  const data = useStats('days', 365 * 24 * 60)
   return (
     <Container style={{ padding: '1rem' }}>
+      { data.data && data.data.data.length === 0 && <Notice
+        icon={<MaterialSymbolIcon icon="info" />}
+        color="warning" title="No Data"
+        desc="At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the settings page and copy the token into the plugin." /> }
       <Typography.H1>{ 'Dashboard' }</Typography.H1>
       <Flex gap="1rem" direction="column">
         <ActivityChartPanel />
@@ -218,7 +225,7 @@ function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
     }
   }, [data, theme])
   return <div style={{
-    maxWidth: 'calc(100vw - 4rem - 2px)',
+    maxWidth: 'calc(100vw - 6rem - 2px)',
     overflow: 'hidden',
   }} id="roku" />
 }
