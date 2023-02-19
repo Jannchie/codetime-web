@@ -37,6 +37,19 @@ export function useUserData () {
   }>('/user')
 }
 
+export async function deleteRecords () {
+  const finalURL = baseURL + '/user/records'
+  const res = await fetch(finalURL, {
+    method: 'DELETE',
+    credentials: 'include',
+  })
+  if (res.status !== 200) {
+    const data = await res.json()
+    throw new Error(data.error)
+  }
+  return res
+}
+
 export function useUserDuration (ms: number) {
   return useFetch<{ minutes: number }>(`/user/duration?in=${ms}`)
 }
