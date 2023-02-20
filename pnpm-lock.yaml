@@ -9,6 +9,7 @@ specifiers:
   d3: ^7.8.2
   eslint: ^8.34.0
   localforage: ^1.10.0
+  markdown-to-jsx: ^7.1.9
   match-sorter: ^6.3.1
   react: ^18.2.0
   react-dom: ^18.2.0
@@ -23,6 +24,7 @@ specifiers:
 dependencies:
   d3: 7.8.2
   localforage: 1.10.0
+  markdown-to-jsx: 7.1.9_react@18.2.0
   match-sorter: 6.3.1
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -2383,6 +2385,15 @@ packages:
     dependencies:
       yallist: 4.0.0
     dev: true
+
+  /markdown-to-jsx/7.1.9_react@18.2.0:
+    resolution: {integrity: sha512-x4STVIKIJR0mGgZIZ5RyAeQD7FEZd5tS8m/htbcVGlex32J+hlSLj+ExrHCxP6nRKF1EKbcO7i6WhC1GtOpBlA==}
+    engines: {node: '>= 10'}
+    peerDependencies:
+      react: '>= 0.14.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /match-sorter/6.3.1:
     resolution: {integrity: sha512-mxybbo3pPNuA+ZuCUhm5bwNkXrJTbsk5VWbR5wiwz/GC6LIiegBGn2w3O08UG/jdbYLinw51fSQ5xNU1U3MgBw==}

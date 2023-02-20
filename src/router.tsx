@@ -9,6 +9,7 @@ import { DashboardShields } from './pages/dashboard/DashboardShields'
 import { Aggrements } from './pages/aggrements/Aggrements'
 import { PrivacyPolicy } from './pages/aggrements/PrivacyPolicy'
 import { TermsOfUse } from './pages/aggrements/TermsOfUse'
+import { Commerce } from './pages/aggrements/Commerce'
 
 export const router = createBrowserRouter([
   {
@@ -22,9 +23,14 @@ export const router = createBrowserRouter([
           {
             path: 'privacy-policy',
             element: <PrivacyPolicy />,
-          }, {
+          },
+          {
             path: 'terms-of-use',
             element: <TermsOfUse />,
+          },
+          {
+            path: 'commerce',
+            element: <Commerce />,
           },
         ],
       },
