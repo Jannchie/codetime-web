@@ -3,7 +3,7 @@ export function getDurationText (ms: number): string {
   let result = ''
   const MS_OF_HOUR = 3600000
   const MS_OF_MINUTE = 60000
-  if (ms > MS_OF_HOUR) {
+  if (ms >= MS_OF_HOUR) {
     // 超过1小时
     if (result !== '') {
       result += ' '
@@ -15,7 +15,7 @@ export function getDurationText (ms: number): string {
     }
     ms %= MS_OF_HOUR
   }
-  if (ms > MS_OF_MINUTE) {
+  if (ms >= MS_OF_MINUTE) {
     if (result !== '') {
       result += ' '
     }
