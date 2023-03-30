@@ -208,12 +208,12 @@ function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
       if (!chart.current) {
         chart.current = RokuCal
           .New('#roku')
-          .setTheme({
-            nanFillColor: 'hsl(var(--r-background-1))',
-            visualMap: theme === 'light' ? d3.schemeBlues[6].slice(1) : d3.schemeBlues[6].slice(2, 6).reverse(),
-          })
           .setData(data as any)
       }
+      chart.current.setTheme({
+        nanFillColor: 'hsl(var(--r-background-1))',
+        visualMap: theme === 'light' ? d3.schemeBlues[9].slice(1) : d3.quantize(d3.interpolateHcl('#5AF2', '#2AF'), 8),
+      })
       chart.current.draw({
         durationDays: 365,
         tooltipFormatter: (d: CalData) => {

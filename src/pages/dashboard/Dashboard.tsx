@@ -19,12 +19,12 @@ export function Dashboard () {
   const user = useUserData()
   const nav = useNavigate()
   useEffect(() => {
+    // trigger browser debug
     if (!user.data && !user.isLoading) nav('/')
   }, [nav, user.data, user.isLoading])
   return (
     <div className="App">
       <HolyGrail
-        style={{ height: '100%' }}
         header={<Appbar
           border
           icon={<img alt="CodeTime Logo" width={20} src="/icon.svg" />}
@@ -33,7 +33,7 @@ export function Dashboard () {
           tailing={<AvatarComponent />}
         />}
         main={<>
-          <Flex justify="center">
+          <Flex justify="center" >
             <Panel border style={{ marginTop: '1rem', borderRadius: '999px', lineHeight: 0 }}>
               <Flex >
                 {
