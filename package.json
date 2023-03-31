@@ -11,15 +11,12 @@
   "dependencies": {
     "@roku-ui/icons-carbon": "^0.0.1",
     "d3": "^7.8.3",
-    "localforage": "^1.10.0",
     "markdown-to-jsx": "^7.2.0",
-    "match-sorter": "^6.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.10.0",
     "roku-charts": "^0.3.4",
-    "roku-ui": "^0.5.1",
-    "sort-by": "^1.2.0",
+    "roku-ui": "^0.5.2",
     "swr": "^2.1.1"
   },
   "devDependencies": {
