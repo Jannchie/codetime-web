@@ -4,3 +4,16 @@
   --webkit-background-clip: text;
   color: transparent;
 }
+
+html {
+  touch-action: manipulation;
+}
+
+body {
+  -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
+  -ms-text-size-adjust: none;
+  text-size-adjust: none;
+  user-select: none;
+  -webkit-user-select: none;
+}

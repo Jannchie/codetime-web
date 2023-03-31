@@ -11,3 +11,18 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <Notifications />
   </React.StrictMode>,
 )
+
+// 禁用双指缩放事件
+document.documentElement.addEventListener('gesturestart', function (event) {
+  event.preventDefault()
+}, false)
+
+// 禁用双击缩放事件
+let lastTouchEnd = 0
+document.documentElement.addEventListener('touchend', function (event) {
+  const now = Date.now()
+  if (now - lastTouchEnd <= 300) {
+    event.preventDefault()
+  }
+  lastTouchEnd = now
+}, false)
