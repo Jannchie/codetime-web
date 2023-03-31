@@ -1,9 +1,8 @@
+import { useSearchParams } from 'react-router-dom'
 import useSWR from 'swr'
-import languageIdentifiers from '../data/LanguageIdentifiers.json'
+
 const baseURL = import.meta.env.VITE_API_BASE_URL
 
-const entries = Object.entries(languageIdentifiers)
-const languageIdentifiersMap = new Map(entries)
 function useFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
   const finalURL = baseURL + url
@@ -19,7 +18,7 @@ function useFetch<D> (url: string, options: RequestInit = {}) {
       if (key === finalURL) return
       if (retryCount >= 3) return
       if (error instanceof Error && error.message === 'Unauthorized') return
-      setTimeout(() => revalidate({ retryCount }), 15000)
+      setTimeout(async () => await revalidate({ retryCount }), 15000)
     },
   })
   return res
@@ -67,9 +66,10 @@ function getTimezoneString () {
 export function useStats (
   unit: 'minutes' | 'days' | 'hours' = 'minutes',
   limit = 30,
+  otherParams = '',
 ) {
   return useFetch<{ data: Array<{ duration: number, time: string }> }>(
-    `/stats?by=time&tz=${getTimezoneString()}&limit=${limit}&unit=${unit}`,
+    `/stats?by=time&tz=${getTimezoneString()}&limit=${limit}&unit=${unit}&` + otherParams,
   )
 }
 
@@ -78,16 +78,9 @@ export function useUserTop (
   minutes = 60,
   limit = 5,
 ) {
+  const [params] = useSearchParams()
   const res = useFetch<Array<{ field: string, minutes: number }>>(
-    `/top?field=${field}&minutes=${minutes}&limit=${limit}`,
+    `/top?field=${field}&minutes=${minutes}&limit=${limit}&${params.toString()}`,
   )
-  if (res.data) {
-    res.data.map((d) => {
-      if (field === 'language') {
-        d.field = languageIdentifiersMap.get(d.field) ?? d.field
-      }
-      return d
-    })
-  }
   return res
 }

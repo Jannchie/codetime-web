@@ -10,6 +10,7 @@ import {
   useTheme,
   Notice,
   MaterialSymbolIcon,
+  Tag,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
@@ -17,6 +18,8 @@ import { getDurationText } from '../../utils/getDurationText'
 import { getTimestampList, useWindowSize } from '../../utils/getTimestampList'
 import * as d3 from 'd3'
 import { type CalData } from 'roku-charts/dist/types/configs'
+import { useSearchParams } from 'react-router-dom'
+import getLanguageName from '../../utils/getLanguageName'
 export function UserTop ({
   field,
   minutes = 60 * 24,
@@ -26,6 +29,7 @@ export function UserTop ({
   minutes?: number
   limit?: number
 }) {
+  const [params, setParams] = useSearchParams()
   const data = useUserTop(field, minutes, limit)
   let max: number = 0
   if (data.data) {
@@ -36,31 +40,43 @@ export function UserTop ({
       <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
         { capitalizeFirstLetter(field) }
       </div>
-      { data.data?.map((d) => (
-        <Flex
-          key={d.field}
-          direction="column"
-          style={{ marginBottom: '0.5rem' }}
-        >
+      { data.data?.map((d) => {
+        const selected = params.get(field) === d.field
+        return (
           <Flex
-            gap="1rem"
-            style={{ width: '100%', justifyContent: 'space-between' }}
+            key={d.field}
+            direction="column"
+            style={{ paddingBottom: '0.5rem', cursor: 'pointer', fontWeight: selected ? 'bold' : 'normal', color: selected ? 'hsl(var(--r-primary-2))' : 'hsl(var(--r-fontground-2))', transition: 'all 0.15s ease-in-out' }}
+            onClick={() => {
+              if (selected) {
+                params.delete(field)
+                setParams(params)
+              } else {
+                params.set(field, d.field)
+                setParams(params)
+              }
+            }}
           >
-            <div>{ d.field }</div>
-            <div>{ getDurationText(d.minutes * 60 * 1000) }</div>
+            <Flex
+              gap="1rem"
+              style={{ width: '100%', justifyContent: 'space-between' }}
+            >
+              <div>{ field === 'language' ? getLanguageName(d.field) : d.field }</div>
+              <div>{ getDurationText(d.minutes * 60 * 1000) }</div>
+            </Flex>
+            <div className="bg-background-3" style={{ borderRadius: '1px' }}>
+              <div
+                className="bg-primary-2"
+                style={{
+                  height: '2px',
+                  width: `${(d.minutes / max) * 100}%`,
+                  borderRadius: '1px',
+                }}
+              />
+            </div>
           </Flex>
-          <div className="bg-background-3" style={{ borderRadius: '1px' }}>
-            <div
-              className="bg-primary-2"
-              style={{
-                height: '2px',
-                width: `${(d.minutes / max) * 100}%`,
-                borderRadius: '1px',
-              }}
-            />
-          </div>
-        </Flex>
-      )) }
+        )
+      }) }
     </Panel>
   )
 }
@@ -109,7 +125,8 @@ export function UserPanel ({ minutes }: { minutes: number }) {
 }
 
 function useBools (minutes = 30) {
-  const stats = useStats('minutes', minutes)
+  const [params] = useSearchParams()
+  const stats = useStats('minutes', minutes, params.toString())
   if (!stats.data) return []
   const allTimestamps = getTimestampList(minutes)
   const set = stats.data.data.reduce((acc: Set<string>, d: { time: any }) => {
@@ -118,23 +135,6 @@ function useBools (minutes = 30) {
   }, new Set<string>())
   const boolList = allTimestamps.map((d) => set.has(d))
   return boolList.reverse()
-}
-
-export function DashboardHome () {
-  const data = useStats('days', 365 * 24 * 60)
-  return (
-    <Container style={{ padding: '1rem' }}>
-      { data.data && data.data.data.length === 0 && <Notice
-        icon={<MaterialSymbolIcon icon="info" />}
-        color="warning" title="No Data"
-        desc="At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the settings page and copy the token into the plugin." /> }
-      <Typography.H1>{ 'Dashboard' }</Typography.H1>
-      <Flex gap="1rem" direction="column">
-        <ActivityChartPanel />
-        <DaysComponent />
-      </Flex>
-    </Container>
-  )
 }
 
 export function DaysComponent () {
@@ -208,12 +208,12 @@ function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
       if (!chart.current) {
         chart.current = RokuCal
           .New('#roku')
-          .setData(data as any)
       }
       chart.current.setTheme({
         nanFillColor: 'hsl(var(--r-background-1))',
         visualMap: theme === 'light' ? d3.schemeBlues[9].slice(1) : d3.quantize(d3.interpolateHcl('#5AF2', '#2AF'), 8),
       })
+      chart.current.setData(data as any)
       chart.current.draw({
         durationDays: 365,
         tooltipFormatter: (d: CalData) => {
@@ -232,7 +232,8 @@ function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
 
 function ActivityChartPanel () {
   const { theme } = useTheme()
-  const data = useStats('days', 365 * 24 * 60)
+  const [params] = useSearchParams()
+  const data = useStats('days', 365 * 24 * 60, params.toString())
   const calData = data.data?.data.map(d => {
     return {
       date: d.time,
@@ -253,7 +254,7 @@ function ActivityChartPanel () {
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                { 'Most day' }
+                Most day
               </Text>
               <div>
                 { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }
@@ -261,7 +262,7 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                { 'Total\r' }
+                Total
               </Text>
               <div>
                 { getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
@@ -269,7 +270,7 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                { 'Average\r' }
+                Average
               </Text>
               <div>
                 { getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
@@ -280,7 +281,7 @@ function ActivityChartPanel () {
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                { 'Most streak\r' }
+                Most streak
               </Text>
               <div>
                 { calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) } { 'Days\r' }
@@ -288,7 +289,7 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
               <Text size="sm" className="text-primary-2">
-                { 'Current streak\r' }
+                Current streak
               </Text>
               <div>
                 { calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) } { 'Days\r' }
@@ -296,9 +297,46 @@ function ActivityChartPanel () {
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }} />
           </Flex>
-
         </div>
       </Flex>
     </Flex>
   </Panel>
+}
+
+function FilterList () {
+  const [params, setParams] = useSearchParams()
+  return <Flex gap=".25rem" align="center">
+    {
+      Array.from(params.entries()).map(([k, v]) => {
+        return <Tag
+          key={k + v}
+          onClose={() => {
+            const newParams = new URLSearchParams(params)
+            newParams.delete(k)
+            setParams(newParams)
+          }}
+        >
+          { capitalizeFirstLetter(k) } = { k === 'language' ? getLanguageName(v) : v }
+        </Tag>
+      })
+    }
+  </Flex>
+}
+export function DashboardHome () {
+  const [params] = useSearchParams()
+  const data = useStats('days', 365 * 24 * 60, params.toString())
+  return (
+    <Container style={{ padding: '1rem' }}>
+      { data.data && data.data.data.length === 0 && <Notice
+        icon={<MaterialSymbolIcon icon="info" />}
+        color="warning" title="No Data"
+        desc="At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the settings page and copy the token into the plugin." /> }
+      <Typography.H1> Dashboard </Typography.H1>
+      <Flex gap="1rem" direction="column">
+        <FilterList />
+        <ActivityChartPanel />
+        <DaysComponent />
+      </Flex>
+    </Container>
+  )
 }
