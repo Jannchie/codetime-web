@@ -9,9 +9,23 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,0,0"
     />
     <title>CodeTime - A productivity tool for software developers.</title>
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-36N091FBKT"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-36N091FBKT");
+    </script>
   </head>
   <body style="margin: 0px">
-    <div id="root" style="height: 100vh;"></div>
+    <div id="root" style="height: 100vh"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
