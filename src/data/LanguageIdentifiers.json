@@ -1,6 +1,7 @@
 {
   "dockercompose": "Docker Compose",
   "properties": "Properties",
+  "nginx": "Nginx Config",
   "abap": "ABAP",
   "bat": "Windows Bat",
   "bibtex": "BibTeX",
