@@ -18,12 +18,12 @@ body {
   -webkit-user-select: none;
 }
 
+@font-face {
+  font-family: 'Share Tech Mono';
+  src: url('/ShareTechMono-Regular.ttf') format('truetype');
+}
+
 .monospace {
-  /* ShareTechMono-Regular.ttf */
   font-family: 'Share Tech Mono', monospace;
 }
 
-@font-face {
-  font-family: 'Share Tech Mono';
-  src: url('./ShareTechMono-Regular.ttf') format('truetype');
-}

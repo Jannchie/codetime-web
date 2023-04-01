@@ -1,3 +1,4 @@
+import { CarbonCut } from '@roku-ui/icons-carbon'
 import { useState } from 'react'
 import {
   Flex,
@@ -6,7 +7,6 @@ import {
   TextField,
   Panel,
   Btn,
-  MaterialSymbolIcon,
   pushNotice,
 } from 'roku-ui'
 import { useUserData } from '../../api'
@@ -27,7 +27,12 @@ export function ClipableTextField ({ text }: { text: string }) {
       })
       void navigator.clipboard.writeText(text)
     }}>
-      <MaterialSymbolIcon icon="cut" style={{ marginRight: '0.25rem' }}/> { 'Copy' }
+      <Flex align="center" gap="0.25rem">
+        <CarbonCut width="20px" />
+        <span>
+          { 'Copy' }
+        </span>
+      </Flex>
     </Btn>
   </Flex>
 }
@@ -68,7 +73,7 @@ export function DashboardShields () {
   const uid = user.data?.id
   return (
     <Container style={{ padding: '1rem' }}>
-      <Typography.H1>{ 'Shields' }</Typography.H1>
+      <Typography.H1 className="monospace"> Shields </Typography.H1>
       <Flex gap="1rem" direction="column" >
         { uid && <ShieldPanel uid={uid} /> }
       </Flex>

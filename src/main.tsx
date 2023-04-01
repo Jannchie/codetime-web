@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import 'roku-ui/style.css'
+import './styles/index.css'
 import { router } from './router'
 import { RouterProvider } from 'react-router-dom'
 import { Notifications } from 'roku-ui'

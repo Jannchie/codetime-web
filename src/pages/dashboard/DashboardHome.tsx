@@ -9,7 +9,6 @@ import {
   Text,
   useTheme,
   Notice,
-  MaterialSymbolIcon,
   Tag,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
@@ -20,6 +19,7 @@ import * as d3 from 'd3'
 import { type CalData } from 'roku-charts/dist/types/configs'
 import { useSearchParams } from 'react-router-dom'
 import getLanguageName from '../../utils/getLanguageName'
+import { CarbonInformation } from '@roku-ui/icons-carbon'
 export function UserTop ({
   field,
   minutes = 60 * 24,
@@ -37,7 +37,12 @@ export function UserTop ({
   }
   return (
     <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
-      <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
+      <div style={{
+        fontFamily: '"Share Tech Mono", monospace',
+        fontSize: '1.5rem',
+        fontWeight: 'bolder',
+        marginBottom: '0.5rem',
+      }}>
         { capitalizeFirstLetter(field) }
       </div>
       { data.data?.map((d) => {
@@ -243,7 +248,12 @@ function ActivityChartPanel () {
 
   return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
     <Flex direction="column">
-      <div style={{ fontSize: '1.5rem', fontWeight: 'bolder', marginBottom: '0.5rem' }}>
+      <div style={{
+        fontFamily: '"Share Tech Mono", monospace',
+        fontSize: '1.5rem',
+        fontWeight: 'bolder',
+        marginBottom: '0.5rem',
+      }}>
         { 'Recent Activity' }
       </div>
       <Flex style={{ position: 'relative' }} gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
@@ -253,7 +263,7 @@ function ActivityChartPanel () {
         }}>
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2">
+              <Text size="sm" className="text-primary-2 monospace">
                 Most day
               </Text>
               <div>
@@ -261,7 +271,7 @@ function ActivityChartPanel () {
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2">
+              <Text size="sm" className="text-primary-2 monospace">
                 Total
               </Text>
               <div>
@@ -269,7 +279,7 @@ function ActivityChartPanel () {
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2">
+              <Text size="sm" className="text-primary-2 monospace">
                 Average
               </Text>
               <div>
@@ -280,7 +290,7 @@ function ActivityChartPanel () {
 
           <Flex gap="1rem" style={{ width: '100%' }}>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2">
+              <Text size="sm" className="text-primary-2 monospace">
                 Most streak
               </Text>
               <div>
@@ -288,7 +298,7 @@ function ActivityChartPanel () {
               </div>
             </div>
             <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2">
+              <Text size="sm" className="text-primary-2 monospace">
                 Current streak
               </Text>
               <div>
@@ -332,10 +342,10 @@ export function DashboardHome () {
   return (
     <Container style={{ padding: '1rem' }}>
       { data.data && data.data.data.length === 0 && <Notice
-        icon={<MaterialSymbolIcon icon="info" />}
+        icon={<CarbonInformation width="20px"/>}
         color="warning" title="No Data"
         desc="At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the settings page and copy the token into the plugin." /> }
-      <Typography.H1> Dashboard </Typography.H1>
+      <Typography.H1 className="monospace"> Dashboard </Typography.H1>
       <Flex gap="1rem" direction="column">
         <FilterList />
         <ActivityChartPanel />

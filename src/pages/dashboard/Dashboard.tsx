@@ -1,6 +1,7 @@
+import { CarbonBadge, CarbonDashboard, CarbonToolKit } from '@roku-ui/icons-carbon'
 import { useEffect } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { Appbar, Avatar, Btn, Flex, HolyGrail, MaterialSymbolIcon, Panel, useTheme } from 'roku-ui'
+import { Appbar, Avatar, Btn, Flex, HolyGrail, Panel, useTheme } from 'roku-ui'
 import { useUserData } from '../../api'
 
 export function AvatarComponent () {
@@ -38,9 +39,9 @@ export function Dashboard () {
               <Flex >
                 {
                   [
-                    { to: '/dashboard', icon: 'cottage' },
-                    { to: '/dashboard/shields', icon: 'workspace_premium' },
-                    { to: '/dashboard/settings', icon: 'construction' },
+                    { to: '/dashboard', icon: <CarbonDashboard /> },
+                    { to: '/dashboard/shields', icon: <CarbonBadge /> },
+                    { to: '/dashboard/settings', icon: <CarbonToolKit /> },
                   ].map(d => {
                     return (
                       <NavLink key={d.to} end to={d.to} >
@@ -48,7 +49,7 @@ export function Dashboard () {
                           ({ isActive }) => {
                             return (
                               <Btn icon text color={isActive ? 'primary' : 'default'}>
-                                <MaterialSymbolIcon icon={d.icon} />
+                                { d.icon }
                               </Btn>
                             )
                           }
