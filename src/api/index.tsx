@@ -20,6 +20,11 @@ function useFetch<D> (url: string, options: RequestInit = {}) {
       if (error instanceof Error && error.message === 'Unauthorized') return
       setTimeout(async () => await revalidate({ retryCount }), 15000)
     },
+    revalidateOnFocus: false,
+    refreshWhenHidden: false,
+    refreshWhenOffline: false,
+    revalidateIfStale: false,
+    revalidateOnReconnect: false,
   })
   return res
 }

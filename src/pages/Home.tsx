@@ -15,7 +15,7 @@ export function AwesomeText ({ children, colorStart, colorEnd }: { children?: Re
     }
   }, [])
   return (
-    <div className="gradient-text"
+    <div className="gradient-text monospace"
       style={{
         display: 'inline-block',
         backgroundImage: `linear-gradient(${deg}deg, ${colorStart} 5%, ${colorEnd} 95%)`,
@@ -42,12 +42,11 @@ export function Home () {
     <>
       <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{
-          fontFamily: 'monospace',
           padding: '6rem 0rem 0rem 0rem',
         }}>
-          <AwesomeText colorStart="#333" colorEnd={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}>
+          <AwesomeText colorStart="#888" colorEnd={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}>
             <Text size="xxl">
-              Code
+              Code.
             </Text>
           </AwesomeText>
           <AwesomeText colorStart={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'} colorEnd="#2980B9">
