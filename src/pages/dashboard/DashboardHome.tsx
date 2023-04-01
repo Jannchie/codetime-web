@@ -305,7 +305,11 @@ function ActivityChartPanel () {
 
 function FilterList () {
   const [params, setParams] = useSearchParams()
-  return <Flex gap=".25rem" align="center">
+  return <Flex gap=".25rem" align="center" style={{
+    position: 'sticky',
+    top: '1rem',
+    zIndex: 10,
+  }}>
     {
       Array.from(params.entries()).map(([k, v]) => {
         return <Tag
