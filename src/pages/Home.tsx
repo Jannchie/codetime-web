@@ -42,16 +42,17 @@ export function Home () {
     <>
       <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <div style={{
+          fontFamily: 'monospace',
           padding: '6rem 0rem 0rem 0rem',
         }}>
-          <AwesomeText colorStart="#DA4453" colorEnd={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}>
-            <Text weight="bold" size="xxl">
-              { 'Code.' }
+          <AwesomeText colorStart="#333" colorEnd={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}>
+            <Text size="xxl">
+              Code
             </Text>
           </AwesomeText>
           <AwesomeText colorStart={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'} colorEnd="#2980B9">
             <Text weight="bold" size="xxl">
-              { 'Time' }
+              Time
             </Text>
           </AwesomeText>
         </div>
