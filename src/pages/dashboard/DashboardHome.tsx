@@ -5,6 +5,7 @@ import {
   Container,
   Panel,
   Typography,
+  Anchor,
   Btn,
   Text,
   useTheme,
@@ -17,7 +18,7 @@ import { getDurationText } from '../../utils/getDurationText'
 import { getTimestampList, useWindowSize } from '../../utils/getTimestampList'
 import * as d3 from 'd3'
 import { type CalData } from 'roku-charts/dist/types/configs'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import getLanguageName from '../../utils/getLanguageName'
 import { CarbonInformation } from '@roku-ui/icons-carbon'
 export function UserTop ({
@@ -343,9 +344,9 @@ export function DashboardHome () {
   return (
     <Container style={{ padding: '1rem' }}>
       { data.data && data.data.data.length === 0 && <Notice
-        icon={<CarbonInformation width="20px"/>}
+        icon={<CarbonInformation width="20px" />}
         color="warning" title="No Data"
-        desc="At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the settings page and copy the token into the plugin." /> }
+        desc={<>At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the <Link to={'settings'}><Anchor href="/dashboard/settings">settings</Anchor></Link>  page and copy the token into the plugin.</>} /> }
       <Typography.H1 className="monospace"> Dashboard </Typography.H1>
       <Flex gap="1rem" direction="column">
         <FilterList />
