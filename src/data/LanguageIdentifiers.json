@@ -1,6 +1,8 @@
 {
   "dockercompose": "Docker Compose",
   "properties": "Properties",
+  "matlab": "Matlab",
+  "kotlin": "Kotlin",
   "nginx": "Nginx Config",
   "abap": "ABAP",
   "bat": "Windows Bat",
@@ -38,7 +40,8 @@
   "php": "PHP",
   "plaintext": "Plain Text",
   "powershell": "PowerShell",
-  "jade, pug": "Pug",
+  "jade": "Pug",
+  "pug": "Pug",
   "python": "Python",
   "r": "R",
   "razor": "Razor (cshtml)",

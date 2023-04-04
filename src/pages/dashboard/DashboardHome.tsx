@@ -206,7 +206,7 @@ function calculateCurrentStreak (dates: Date[]): number {
   return currentStreak
 }
 
-function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
+function CalChartComp ({ data, theme }: { data: CalData[], theme?: string }) {
   const chart = useRef<RokuChart<CalData, any>>()
   useEffect(() => {
     if (data) {
@@ -218,7 +218,8 @@ function CalChartComp ({ data, theme }: { data: CalData, theme?: string }) {
         nanFillColor: 'hsl(var(--r-background-1))',
         visualMap: theme === 'light' ? d3.schemeBlues[9].slice(1) : d3.quantize(d3.interpolateHcl('#5AF2', '#2AF'), 8),
       })
-      chart.current.setData(data as any)
+      if (!data || data.length === 0) return
+      chart.current.setData(data)
       chart.current.draw({
         durationDays: 365,
         tooltipFormatter: (d: CalData) => {
