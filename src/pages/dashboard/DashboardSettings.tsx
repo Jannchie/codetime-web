@@ -12,7 +12,7 @@ import {
   Modal,
 } from 'roku-ui'
 import { deleteRecords, useUserData } from '../../api'
-import { CarbonCut, CarbonTrashCan } from '@roku-ui/icons-carbon'
+import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
 export function TokenPanel () {
   const user = useUserData()
   const [hover, setHover] = useState(false)
@@ -83,19 +83,6 @@ export function ThemePanel () {
   )
 }
 
-export function DashboardSettings () {
-  return (
-    <Container style={{ padding: '1rem' }}>
-      <Typography.H1 className="monospace"> Settings </Typography.H1>
-      <Flex gap="1rem" direction="column" >
-        <TokenPanel />
-        <ThemePanel />
-        <DangerPanel />
-      </Flex>
-    </Container>
-  )
-}
-
 function DangerPanel () {
   const [showModal, setShowModal] = useState(false)
   return <Panel border style={{ padding: '1rem', borderColor: 'hsl(var(--r-danger-1))' }}>
@@ -145,4 +132,36 @@ function ConfirmModal ({ setShow }: { setShow: (show: boolean) => void }) {
       }} >{ 'Cancel' }</Btn>
     </Flex>
   </Panel>
+}
+
+function LogoutPanel () {
+  return <Panel border style={{ padding: '1rem' }}>
+    <div className="monospace" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+      Others
+    </div>
+    <Btn color="primary" onClick={() => {
+      // remove cookie
+      document.cookie = 'CODETIME_SESSION=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
+      // redirect to login page
+      window.location.href = '/'
+    }}>
+      <Flex gap="0.5rem">
+        <CarbonLogout width="20px" />
+        Logout
+      </Flex>
+    </Btn>
+  </Panel>
+}
+export function DashboardSettings () {
+  return (
+    <Container style={{ padding: '1rem' }}>
+      <Typography.H1 className="monospace"> Settings </Typography.H1>
+      <Flex gap="1rem" direction="column" >
+        <TokenPanel />
+        <ThemePanel />
+        <DangerPanel />
+        <LogoutPanel />
+      </Flex>
+    </Container>
+  )
 }
