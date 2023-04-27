@@ -221,12 +221,17 @@ function CalChartComp ({ data, theme }: { data: CalData[], theme?: string }) {
       })
       if (!data || data.length === 0) return
       chart.current.setData(data)
-      chart.current.draw({
-        durationDays: 365,
-        tooltipFormatter: (d: CalData) => {
-          return `<b>${d.date}</b> </br> ${d.value ? getDurationText(d.value) : getDurationText(0)}`
-        },
-      })
+      try {
+        chart.current.draw({
+          durationDays: 365,
+          tooltipFormatter: (d: CalData) => {
+            return `<b>${d.date}</b> </br> ${d.value ? getDurationText(d.value) : getDurationText(0)}`
+          },
+        })
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.error(e)
+      }
       const svg = document.querySelector('#roku')?.querySelector('svg')
       if (svg) { svg.style.float = 'right' }
     }
