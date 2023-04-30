@@ -1,7 +1,21 @@
 import { useSearchParams } from 'react-router-dom'
 import useSWR from 'swr'
-
+import useSWRMutation from 'swr/mutation'
 const baseURL = import.meta.env.VITE_API_BASE_URL
+
+export function useMutationFetch<D> (url: string, options: RequestInit = {}) {
+  options.credentials = 'include'
+  const finalURL = baseURL + url
+  const res = useSWRMutation<D>(finalURL, async () => {
+    const res = await fetch(baseURL + url, options)
+    const data = await res.json()
+    if (res.status !== 200) {
+      throw new Error(data.error)
+    }
+    return data
+  }, { })
+  return res
+}
 
 export function useFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
