@@ -3,7 +3,7 @@ import useSWR from 'swr'
 
 const baseURL = import.meta.env.VITE_API_BASE_URL
 
-function useFetch<D> (url: string, options: RequestInit = {}) {
+export function useFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
   const finalURL = baseURL + url
   const res = useSWR<D>(finalURL, async () => {

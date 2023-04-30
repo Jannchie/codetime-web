@@ -24,7 +24,7 @@ export function AwesomeText ({ children, colorStart, colorEnd }: { children?: Re
   )
 }
 
-function useTrueTheme() {
+function useTrueTheme () {
   const { theme } = useTheme()
   const preferTheme = usePrefersColorScheme()
   if (theme === 'system') {
@@ -34,7 +34,7 @@ function useTrueTheme() {
 }
 
 export function Home () {
-  const theme  = useTrueTheme()
+  const theme = useTrueTheme()
   const userRes = useUserData()
   const nav = useNavigate()
   useEffect(() => {

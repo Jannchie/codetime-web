@@ -11,7 +11,7 @@ import {
   useTheme,
   Modal,
 } from 'roku-ui'
-import { deleteRecords, useUserData } from '../../api'
+import { deleteRecords, useFetch, useUserData } from '../../api'
 import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
 export function TokenPanel () {
   const user = useUserData()
@@ -135,15 +135,15 @@ function ConfirmModal ({ setShow }: { setShow: (show: boolean) => void }) {
 }
 
 function LogoutPanel () {
+  const res = useFetch('/auth/logout', { method: 'POST' })
   return <Panel border style={{ padding: '1rem' }}>
     <div className="monospace" style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>
       Others
     </div>
     <Btn color="primary" onClick={() => {
-      // remove cookie
-      document.cookie = 'CODETIME_SESSION=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
-      // redirect to login page
-      window.location.href = '/'
+      void res.mutate().then(() => {
+        window.location.reload()
+      })
     }}>
       <Flex gap="0.5rem">
         <CarbonLogout width="20px" />
