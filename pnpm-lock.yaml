@@ -23,8 +23,8 @@ dependencies:
     specifier: ^0.3.4
     version: 0.3.4(d3@7.8.4)
   roku-ui:
-    specifier: ^0.8.4
-    version: 0.8.4(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.9.2
+    version: 0.9.2(react-dom@18.2.0)(react@18.2.0)
   swr:
     specifier: ^2.1.5
     version: 2.1.5(react@18.2.0)
@@ -2534,8 +2534,8 @@ packages:
     engines: {node: '>=8.6'}
     dev: true
 
-  /postcss@8.4.23:
-    resolution: {integrity: sha512-bQ3qMcpF6A/YjR55xtoTr0jGOlnPOKAIMdOWiv0EIT6HVPEaJiJB4NLljSbiHoC2RX7DN5Uvjtpbg1NPdwv1oA==}
+  /postcss@8.4.24:
+    resolution: {integrity: sha512-M0RzbcI0sO/XJNucsGjvWU9ERWxb/ytp1w6dKtxTKgixdtQDq4rmx/g8W1hnaheq9jgwL/oyEdH5Bc4WwJKMqg==}
     engines: {node: ^10 || ^12 || >=14}
     dependencies:
       nanoid: 3.3.6
@@ -2675,8 +2675,8 @@ packages:
       d3: 7.8.4
     dev: false
 
-  /roku-ui@0.8.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-5AwwtzZbD1iU+iVuSreg/0AleR/fAM7O4e3diihKwYYaJEQTP1onWE1aPyAfbLSmEuX1EKYDVw/XoQ+fR1vbRA==}
+  /roku-ui@0.9.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9dN5H/0d9ku6Q0W7i9UxMfOzg8fM+6qyHCk3bI5F6v0D8Z9ZwhOtC+/CvPZaHAQVwBgNBXjG33RXr1yE7GFd8Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
@@ -2956,7 +2956,7 @@ packages:
         optional: true
     dependencies:
       esbuild: 0.17.19
-      postcss: 8.4.23
+      postcss: 8.4.24
       rollup: 3.23.0
     optionalDependencies:
       fsevents: 2.3.2
