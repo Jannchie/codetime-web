@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .ts,.tsx src --fix"
   },
   "dependencies": {
     "@roku-ui/icons-carbon": "^11.18.0",
@@ -14,19 +15,19 @@
     "markdown-to-jsx": "^7.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.11.0",
+    "react-router-dom": "^6.11.2",
     "roku-charts": "^0.3.4",
-    "roku-ui": "^0.8.0",
+    "roku-ui": "^0.8.4",
     "swr": "^2.1.5"
   },
   "devDependencies": {
     "@jannchie/eslint-config": "^1.3.1",
     "@types/d3": "^7.4.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.1",
-    "@vitejs/plugin-react-swc": "^3.3.0",
-    "eslint": "^8.39.0",
+    "@types/react": "^18.2.7",
+    "@types/react-dom": "^18.2.4",
+    "@vitejs/plugin-react-swc": "^3.3.1",
+    "eslint": "^8.41.0",
     "typescript": "^5.0.4",
-    "vite": "^4.3.3"
+    "vite": "^4.3.9"
   }
 }

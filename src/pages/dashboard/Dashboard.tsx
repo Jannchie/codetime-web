@@ -6,13 +6,19 @@ import { useUserData } from '../../api'
 
 export function AvatarComponent () {
   const user = useUserData()
-  return <div>
-    <NavLink to="/dashboard/settings">
-      { user.data && <Btn icon text color="default">
-        <Avatar src={user.data.avatar} />
-      </Btn> }
-    </NavLink>
-  </div>
+  return (
+    <div>
+      <NavLink to="/dashboard/settings">
+        { user.data && <Btn
+          icon
+          text
+          color="default"
+        >
+          <Avatar src={user.data.avatar} />
+        </Btn> }
+      </NavLink>
+    </div>
+  )
 }
 
 export function Dashboard () {
@@ -28,14 +34,21 @@ export function Dashboard () {
       <HolyGrail
         header={<Appbar
           border
-          icon={<img alt="CodeTime Logo" width={20} src="/icon.svg" />}
+          icon={<img
+            alt="CodeTime Logo"
+            width={20}
+            src="/icon.svg"
+          />}
           varient="pattern"
           title={<div>{ 'CodeTime' }</div>}
           tailing={<AvatarComponent />}
         />}
         main={<>
           <Flex justify="center" >
-            <Panel border style={{ marginTop: '1rem', borderRadius: '999px', lineHeight: 0 }}>
+            <Panel
+              border
+              style={{ marginTop: '1rem', borderRadius: '999px', lineHeight: 0 }}
+            >
               <Flex >
                 {
                   [
@@ -44,11 +57,19 @@ export function Dashboard () {
                     { to: '/dashboard/settings', icon: <CarbonToolKit /> },
                   ].map(d => {
                     return (
-                      <NavLink key={d.to} end to={d.to} >
+                      <NavLink
+                        key={d.to}
+                        end
+                        to={d.to}
+                      >
                         {
                           ({ isActive }) => {
                             return (
-                              <Btn icon text color={isActive ? 'primary' : 'default'}>
+                              <Btn
+                                icon
+                                text
+                                color={isActive ? 'primary' : 'default'}
+                              >
                                 { d.icon }
                               </Btn>
                             )

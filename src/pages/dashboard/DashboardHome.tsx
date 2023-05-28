@@ -37,13 +37,17 @@ export function UserTop ({
     max = data.data.reduce((a, b) => (a.minutes > b.minutes ? a : b)).minutes
   }
   return (
-    <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
+    <Panel
+      border
+      style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}
+    >
       <div style={{
         fontFamily: '"Share Tech Mono", monospace',
         fontSize: '1.5rem',
         fontWeight: 'bolder',
         marginBottom: '0.5rem',
-      }}>
+      }}
+      >
         { capitalizeFirstLetter(field) }
       </div>
       { data.data?.map((d) => {
@@ -70,7 +74,10 @@ export function UserTop ({
               <div>{ field === 'language' ? getLanguageName(d.field) : d.field }</div>
               <div>{ getDurationText(d.minutes * 60 * 1000) }</div>
             </Flex>
-            <div className="bg-background-3" style={{ borderRadius: '1px' }}>
+            <div
+              className="bg-background-3"
+              style={{ borderRadius: '1px' }}
+            >
               <div
                 className="bg-primary-2"
                 style={{
@@ -93,7 +100,10 @@ export function UserPanel ({ minutes }: { minutes: number }) {
   const boolList = useBools(window.width < 1024 ? 30 : 60)
   const duration = useUserDuration(1000 * minutes * 60)
   return (
-    <Panel border style={{ padding: '1rem' }}>
+    <Panel
+      border
+      style={{ padding: '1rem' }}
+    >
       { user.data && (
         <Flex
           gap="1rem"
@@ -102,7 +112,10 @@ export function UserPanel ({ minutes }: { minutes: number }) {
         >
           { duration.data && (
             <div style={{ flexGrow: 1 }}>
-              { getDurationText(duration.data.minutes * 60 * 1000) }{ ' in the last ' }{ getDurationText(minutes * 60 * 1000) }{ '.\r' }
+              { getDurationText(duration.data.minutes * 60 * 1000) }
+              { ' in the last ' }
+              { getDurationText(minutes * 60 * 1000) }
+              { '.\r' }
             </div>
           ) }
           <div style={{ flexGrow: 10 }} />
@@ -145,21 +158,41 @@ function useBools (minutes = 30) {
 
 export function DaysComponent () {
   const [days, setDays] = useState(1)
-  return <Flex direction="column" gap="1rem">
-    <div>
-      <Btn.Group value={days} setValue={setDays}>
-        <Btn value={1}>{ 'Today' }</Btn>
-        <Btn value={7}>{ 'Week' }</Btn>
-        <Btn value={30}>{ '30 Days' }</Btn>
-      </Btn.Group>
-    </div>
-    <UserPanel minutes={days * 24 * 60} />
-    <Flex gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
-      <UserTop field="platform" minutes={days * 24 * 60} />
-      <UserTop field="project" minutes={days * 24 * 60} />
-      <UserTop field="language" minutes={days * 24 * 60}/>
+  return (
+    <Flex
+      direction="column"
+      gap="1rem"
+    >
+      <div>
+        <Btn.Group
+          value={days}
+          setValue={setDays}
+        >
+          <Btn value={1}>{ 'Today' }</Btn>
+          <Btn value={7}>{ 'Week' }</Btn>
+          <Btn value={30}>{ '30 Days' }</Btn>
+        </Btn.Group>
+      </div>
+      <UserPanel minutes={days * 24 * 60} />
+      <Flex
+        gap="1rem"
+        direction={useWindowSize().width < 1024 ? 'column' : 'row'}
+      >
+        <UserTop
+          field="platform"
+          minutes={days * 24 * 60}
+        />
+        <UserTop
+          field="project"
+          minutes={days * 24 * 60}
+        />
+        <UserTop
+          field="language"
+          minutes={days * 24 * 60}
+        />
+      </Flex>
     </Flex>
-  </Flex>
+  )
 }
 
 function calculateStreak (dates: Date[]): number {
@@ -236,10 +269,15 @@ function CalChartComp ({ data, theme }: { data: CalData[], theme?: string }) {
       if (svg) { svg.style.float = 'right' }
     }
   }, [data, theme])
-  return <div style={{
-    maxWidth: 'calc(100vw - 6rem - 2px)',
-    overflow: 'hidden',
-  }} id="roku" />
+  return (
+    <div
+      style={{
+        maxWidth: 'calc(100vw - 6rem - 2px)',
+        overflow: 'hidden',
+      }}
+      id="roku"
+    />
+  )
 }
 
 function ActivityChartPanel () {
@@ -253,95 +291,145 @@ function ActivityChartPanel () {
     }
   })
 
-  return <Panel border style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}>
-    <Flex direction="column">
-      <div style={{
-        fontFamily: '"Share Tech Mono", monospace',
-        fontSize: '1.5rem',
-        fontWeight: 'bolder',
-        marginBottom: '0.5rem',
-      }}>
-        { 'Recent Activity' }
-      </div>
-      <Flex style={{ position: 'relative' }} gap="1rem" direction={useWindowSize().width < 1024 ? 'column' : 'row'}>
-        <CalChartComp data={calData as any} theme={theme} />
+  return (
+    <Panel
+      border
+      style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}
+    >
+      <Flex direction="column">
         <div style={{
-          flexGrow: 1,
-        }}>
-          <Flex gap="1rem" style={{ width: '100%' }}>
-            <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2 monospace">
-                Most day
-              </Text>
-              <div>
-                { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }
-              </div>
-            </div>
-            <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2 monospace">
-                Total
-              </Text>
-              <div>
-                { getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
-              </div>
-            </div>
-            <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2 monospace">
-                Average
-              </Text>
-              <div>
-                { getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
-              </div>
-            </div>
-          </Flex>
-
-          <Flex gap="1rem" style={{ width: '100%' }}>
-            <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2 monospace">
-                Most streak
-              </Text>
-              <div>
-                { calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) } { 'Days\r' }
-              </div>
-            </div>
-            <div style={{ flexGrow: 1, flexBasis: 0 }}>
-              <Text size="sm" className="text-primary-2 monospace">
-                Current streak
-              </Text>
-              <div>
-                { calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) } { 'Days\r' }
-              </div>
-            </div>
-            <div style={{ flexGrow: 1, flexBasis: 0 }} />
-          </Flex>
+          fontFamily: '"Share Tech Mono", monospace',
+          fontSize: '1.5rem',
+          fontWeight: 'bolder',
+          marginBottom: '0.5rem',
+        }}
+        >
+          { 'Recent Activity' }
         </div>
+        <Flex
+          style={{ position: 'relative' }}
+          gap="1rem"
+          direction={useWindowSize().width < 1024 ? 'column' : 'row'}
+        >
+          <CalChartComp
+            data={calData as any}
+            theme={theme}
+          />
+          <div style={{
+            flexGrow: 1,
+          }}
+          >
+            <Flex
+              gap="1rem"
+              style={{ width: '100%' }}
+            >
+              <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                <Text
+                  size="sm"
+                  className="text-primary-2 monospace"
+                >
+                  Most day
+                </Text>
+                <div>
+                  { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }
+                </div>
+              </div>
+              <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                <Text
+                  size="sm"
+                  className="text-primary-2 monospace"
+                >
+                  Total
+                </Text>
+                <div>
+                  { getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
+                </div>
+              </div>
+              <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                <Text
+                  size="sm"
+                  className="text-primary-2 monospace"
+                >
+                  Average
+                </Text>
+                <div>
+                  { getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
+                </div>
+              </div>
+            </Flex>
+
+            <Flex
+              gap="1rem"
+              style={{ width: '100%' }}
+            >
+              <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                <Text
+                  size="sm"
+                  className="text-primary-2 monospace"
+                >
+                  Most streak
+                </Text>
+                <div>
+                  { calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) }
+                  { ' ' }
+                  { 'Days\r' }
+                </div>
+              </div>
+              <div style={{ flexGrow: 1, flexBasis: 0 }}>
+                <Text
+                  size="sm"
+                  className="text-primary-2 monospace"
+                >
+                  Current streak
+                </Text>
+                <div>
+                  { calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) }
+                  { ' ' }
+                  { 'Days\r' }
+                </div>
+              </div>
+              <div style={{ flexGrow: 1, flexBasis: 0 }} />
+            </Flex>
+          </div>
+        </Flex>
       </Flex>
-    </Flex>
-  </Panel>
+    </Panel>
+  )
 }
 
 function FilterList () {
   const [params, setParams] = useSearchParams()
-  return <Flex gap=".25rem" align="center" style={{
-    position: 'sticky',
-    top: '1rem',
-    zIndex: 10,
-  }}>
-    {
-      Array.from(params.entries()).map(([k, v]) => {
-        return <Tag
-          key={k + v}
-          onClose={() => {
-            const newParams = new URLSearchParams(params)
-            newParams.delete(k)
-            setParams(newParams)
-          }}
-        >
-          { capitalizeFirstLetter(k) } = { k === 'language' ? getLanguageName(v) : v }
-        </Tag>
-      })
-    }
-  </Flex>
+  return (
+    <Flex
+      gap=".25rem"
+      align="center"
+      style={{
+        position: 'sticky',
+        top: '1rem',
+        zIndex: 10,
+      }}
+    >
+      {
+        Array.from(params.entries()).map(([k, v]) => {
+          return (
+            <Tag
+              key={k + v}
+              onClose={() => {
+                const newParams = new URLSearchParams(params)
+                newParams.delete(k)
+                setParams(newParams)
+              }}
+            >
+              { capitalizeFirstLetter(k) }
+              { ' ' }
+              =
+              { k === 'language' ? getLanguageName(v) : v }
+            </Tag>
+          )
+        })
+      }
+    </Flex>
+  )
 }
 export function DashboardHome () {
   const [params] = useSearchParams()
@@ -350,10 +438,21 @@ export function DashboardHome () {
     <Container style={{ padding: '1rem' }}>
       { data.data && data.data.data.length === 0 && <Notice
         icon={<CarbonInformation width="20px" />}
-        color="warning" title="No Data"
-        desc={<>At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the <Link to={'settings'}><Anchor href="/dashboard/settings">settings</Anchor></Link>  page and copy the token into the plugin.</>} /> }
+        color="warning"
+        title="No Data"
+        desc={<>
+          At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the
+          { ' ' }
+          <Link to={'settings'}><Anchor href="/dashboard/settings">settings</Anchor></Link>
+          { ' ' }
+          page and copy the token into the plugin.
+        </>}
+      /> }
       <Typography.H1 className="monospace"> Dashboard </Typography.H1>
-      <Flex gap="1rem" direction="column">
+      <Flex
+        gap="1rem"
+        direction="column"
+      >
         <FilterList />
         <ActivityChartPanel />
         <DaysComponent />

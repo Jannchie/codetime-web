@@ -3,9 +3,10 @@ import Markdown from 'markdown-to-jsx'
 import { Article } from 'roku-ui'
 
 export function Commerce () {
-  return <Article>
-    <Markdown>
-      { `## 特定商取引法（通信販売）に基づく表示
+  return (
+    <Article>
+      <Markdown>
+        { `## 特定商取引法（通信販売）に基づく表示
 当サイトで取り扱う商品・サービスのうち、当社が販売者の商品・サービス（当社が提供するサービスに限る）について、「特定商取引に関する法律」第11条に基づき、次のとおり明示します。
 
 ### 販売業者・サービス提供業者
@@ -67,6 +68,7 @@ CodeTime
 商品・サービス毎に必要に応じて動作環境を表示します。
 
 2023年2月20日 制定` }
-    </Markdown>
-  </Article>
+      </Markdown>
+    </Article>
+  )
 }
