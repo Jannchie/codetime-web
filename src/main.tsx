@@ -11,7 +11,7 @@ import zhCN from './i18n/data/zh-CN.json'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <I18nProvider
-      defaultLocate="zh-CN"
+      defaultLocate="en"
       data={{ en, 'zh-CN': zhCN }}
     >
       <RouterProvider router={router} />
