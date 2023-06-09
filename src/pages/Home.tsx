@@ -2,6 +2,7 @@ import { type ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Btn, Container, Footer, useTheme, Text, usePrefersColorScheme } from 'roku-ui'
 import { useUserData } from '../api'
+import { useI18n } from '../i18n'
 
 export function AwesomeText ({ children, colorStart, colorEnd }: { children?: ReactNode, colorStart: string, colorEnd: string }) {
   const [deg, setDeg] = useState(0)
@@ -39,11 +40,10 @@ export function Home () {
   const theme = useTrueTheme()
   const userRes = useUserData()
   const nav = useNavigate()
+  const { t } = useI18n()
   useEffect(() => {
-    if (userRes.data) {
-      if (!window.location.pathname.includes('/dashboard')) {
-        nav('/dashboard')
-      }
+    if (userRes.data && !window.location.pathname.includes('/dashboard')) {
+      nav('/dashboard')
     }
   }, [nav, userRes.data])
   if (userRes.isLoading) {
@@ -81,7 +81,7 @@ export function Home () {
           style={{ maxWidth: '60ch', paddingTop: '1rem' }}
         >
           <Text size="sm">
-            { 'A productivity tool for software developers. It helps developers track the amount of time they spend on coding projects, and provides insights into their coding habits and productivity.\r' }
+            { t('A productivity tool for software developers. It helps developers track the amount of time they spend on coding projects, and provides insights into their coding habits and productivity.') }
           </Text>
         </div>
         <Btn
@@ -105,7 +105,7 @@ export function Home () {
                 fill={theme === 'dark' ? '#FFF' : '#000'}
               />
             </svg>
-            <span style={{ marginLeft: '0.5rem', fontSize: '1rem' }}>{ 'Sign in with Github' }</span>
+            <span style={{ marginLeft: '0.5rem', fontSize: '1rem' }}>{ t('Sign in with Github') }</span>
           </div>
         </Btn>
         <div
@@ -114,7 +114,7 @@ export function Home () {
             marginTop: '1rem',
           }}
         >
-          { 'Free for everyone. No credit card required.\r' }
+          { t('Free for everyone. No credit card required.') }
         </div>
       </div>
       <Container style={{

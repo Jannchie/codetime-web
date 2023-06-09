@@ -1,9 +1,16 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@roku-ui/icons-carbon':
     specifier: ^11.18.0
     version: 11.18.0(react-dom@18.2.0)(react@18.2.0)
+  '@types/sprintf-js':
+    specifier: ^1.1.2
+    version: 1.1.2
   d3:
     specifier: ^7.8.4
     version: 7.8.4
@@ -25,6 +32,9 @@ dependencies:
   roku-ui:
     specifier: ^0.9.2
     version: 0.9.2(react-dom@18.2.0)(react@18.2.0)
+  sprintf-js:
+    specifier: ^1.1.2
+    version: 1.1.2
   swr:
     specifier: ^2.1.5
     version: 2.1.5(react@18.2.0)
@@ -715,6 +725,10 @@ packages:
   /@types/semver@7.5.0:
     resolution: {integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==}
     dev: true
+
+  /@types/sprintf-js@1.1.2:
+    resolution: {integrity: sha512-hkgzYF+qnIl8uTO8rmUSVSfQ8BIfMXC4yJAF4n8BE758YsKBZvFC4NumnAegj7KmylP0liEZNpb9RRGFMbFejA==}
+    dev: false
 
   /@typescript-eslint/eslint-plugin@5.59.7(@typescript-eslint/parser@5.59.7)(eslint@8.41.0)(typescript@5.0.4):
     resolution: {integrity: sha512-BL+jYxUFIbuYwy+4fF86k5vdT9lT0CNJ6HtwrIvGh0PhH8s0yy5rjaKH2fDCrz5ITHy07WCzVGNvAmjJh4IJFA==}
@@ -2763,6 +2777,10 @@ packages:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /sprintf-js@1.1.2:
+    resolution: {integrity: sha512-VE0SOVEHCk7Qc8ulkWw3ntAzXuqf7S2lvwQaDLRnUeIEaKNQJzV6BwmLKhOqT61aGhfUMrXeaBk+oDGCzvhcug==}
+    dev: false
 
   /stop-iteration-iterator@1.0.0:
     resolution: {integrity: sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==}

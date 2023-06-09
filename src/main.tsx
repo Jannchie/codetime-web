@@ -5,11 +5,18 @@ import './styles/index.css'
 import { router } from './router'
 import { RouterProvider } from 'react-router-dom'
 import { Notifications } from 'roku-ui'
-
+import { I18nProvider } from './i18n'
+import en from './i18n/data/en.json'
+import zhCN from './i18n/data/zh-CN.json'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    <Notifications />
+    <I18nProvider
+      defaultLocate="zh-CN"
+      data={{ en, 'zh-CN': zhCN }}
+    >
+      <RouterProvider router={router} />
+      <Notifications />
+    </I18nProvider>
   </React.StrictMode>,
 )
 
