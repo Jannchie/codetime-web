@@ -13,9 +13,11 @@ import {
 } from 'roku-ui'
 import { deleteRecords, useMutationFetch, useUserData } from '../../api'
 import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
+import { useI18n } from '../../i18n'
 export function TokenPanel () {
   const user = useUserData()
   const [hover, setHover] = useState(false)
+  const { t } = useI18n()
   return (
     <Panel
       border
@@ -27,7 +29,7 @@ export function TokenPanel () {
             className="monospace"
             style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}
           >
-            Upload Token
+            { t('Token') }
           </div>
           <Flex gap="1rem">
             <TextField
@@ -45,8 +47,8 @@ export function TokenPanel () {
                   user.data?.upload_token ?? '',
                 )
                 pushNotice({
-                  title: 'Copied',
-                  desc: 'Token copied to clipboard',
+                  title: t('Copied'),
+                  desc: t('Token copied to clipboard.'),
                   type: 'success',
                 })
               }}
@@ -57,7 +59,7 @@ export function TokenPanel () {
               >
                 <CarbonCut width="20px" />
                 <span>
-                  { 'Copy' }
+                  { t('Copy') }
                 </span>
               </Flex>
             </Btn>
@@ -66,9 +68,9 @@ export function TokenPanel () {
             className="text-frontground-3 text-sm"
             style={{ marginTop: '0.25rem' }}
           >
-            { 'This token is used to upload your data to the server. It is recommended to keep it private.' }
+            { t('This token is used to upload your data to the server. It is recommended to keep it private.') }
             <br />
-            { 'Learn how to use the token: ' }
+            { t('Learn how to use the token: ') }
             <Anchor href="https://github.com/datreks/codetime-vscode" >{ 'github.com/datreks/codetime-vscode' }</Anchor>
           </div>
         </>
@@ -79,6 +81,7 @@ export function TokenPanel () {
 
 export function ThemePanel () {
   const { theme, setTheme } = useTheme()
+  const { t, locate, setLocate } = useI18n()
   return (
     <Panel
       border
@@ -89,15 +92,37 @@ export function ThemePanel () {
           className="monospace"
           style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}
         >
-          { 'Theme' }
+          { t('Preferences') }
         </div>
-        <Flex gap="1rem">
+        <Flex
+          col
+          gap="1rem"
+        >
+          <div>
+            <div className="text-lg">{ t('Themes') }</div>
+            <Btn.Group
+              value={theme}
+              setValue={setTheme}
+            >
+              <Btn value="dark" >{ t('Dark') }</Btn>
+              <Btn value="light" >{ t('Light') }</Btn>
+            </Btn.Group>
+          </div>
+          <div className="text-lg">{ t('Languages') }</div>
           <Btn.Group
-            value={theme}
-            setValue={setTheme}
+            value={locate}
+            setValue={setLocate}
           >
-            <Btn value="dark" >{ 'Dark ' }</Btn>
-            <Btn value="light" >{ 'Light ' }</Btn>
+            <Btn
+              value="en"
+            >
+              { t('en') }
+            </Btn>
+            <Btn
+              value="zh-CN"
+            >
+              { t('zh-CN') }
+            </Btn>
           </Btn.Group>
         </Flex>
       </>
@@ -106,6 +131,7 @@ export function ThemePanel () {
 }
 
 function DangerPanel () {
+  const { t } = useI18n()
   const [showModal, setShowModal] = useState(false)
   return (
     <Panel
@@ -116,13 +142,13 @@ function DangerPanel () {
         className="monospace"
         style={{ fontSize: '1.5rem', color: 'hsl(var(--r-danger-1))' }}
       >
-        { 'Danger Zone' }
+        { t('Danger Zone') }
       </div>
       <div
         style={{ fontSize: '0.8rem', marginBottom: '0.5rem' }}
         className="text-frontground-3"
       >
-        { 'I hope you understand what is being done. These operations are irrevocable.' }
+        { t('We hope you understand what is being done. These operations are irrevocable.') }
       </div>
       <Btn
         color="danger"
@@ -132,7 +158,7 @@ function DangerPanel () {
       >
         <Flex gap="0.5rem">
           <CarbonTrashCan width="20px" />
-          { 'Distory All My Records' }
+          { t('Distory All My Records') }
         </Flex>
       </Btn>
       <Modal
@@ -202,6 +228,7 @@ function ConfirmModal ({ setShow }: { setShow: (show: boolean) => void }) {
 }
 
 function LogoutPanel () {
+  const { t } = useI18n()
   const res = useMutationFetch('/auth/logout', { method: 'POST' })
   return (
     <Panel
@@ -212,7 +239,7 @@ function LogoutPanel () {
         className="monospace"
         style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}
       >
-        Others
+        { t('Others') }
       </div>
       <Btn
         color="primary"
@@ -224,16 +251,19 @@ function LogoutPanel () {
       >
         <Flex gap="0.5rem">
           <CarbonLogout width="20px" />
-          Logout
+          { t('Logout') }
         </Flex>
       </Btn>
     </Panel>
   )
 }
 export function DashboardSettings () {
+  const { t } = useI18n()
   return (
     <Container style={{ padding: '1rem' }}>
-      <Typography.H1 className="monospace"> Settings </Typography.H1>
+      <Typography.H1 className="monospace">
+        { t('Settings') }
+      </Typography.H1>
       <Flex
         gap="1rem"
         direction="column"

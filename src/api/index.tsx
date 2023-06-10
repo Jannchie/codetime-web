@@ -6,7 +6,7 @@ const baseURL = import.meta.env.VITE_API_BASE_URL
 export function useMutationFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
   const finalURL = baseURL + url
-  const res = useSWRMutation<D>(finalURL, async () => {
+  return useSWRMutation<D>(finalURL, async () => {
     const res = await fetch(baseURL + url, options)
     const data = await res.json()
     if (res.status !== 200) {
@@ -14,13 +14,12 @@ export function useMutationFetch<D> (url: string, options: RequestInit = {}) {
     }
     return data
   }, { })
-  return res
 }
 
 export function useFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
   const finalURL = baseURL + url
-  const res = useSWR<D>(finalURL, async () => {
+  return useSWR<D>(finalURL, async () => {
     const res = await fetch(baseURL + url, options)
     const data = await res.json()
     if (res.status !== 200) {
@@ -40,7 +39,6 @@ export function useFetch<D> (url: string, options: RequestInit = {}) {
     revalidateIfStale: false,
     revalidateOnReconnect: false,
   })
-  return res
 }
 
 export function useUserData () {
@@ -93,13 +91,12 @@ export function useStats (
 }
 
 export function useUserTop (
-  field: 'platform' | 'language' | 'project',
+  field: string,
   minutes = 60,
   limit = 5,
 ) {
   const [params] = useSearchParams()
-  const res = useFetch<Array<{ field: string, minutes: number }>>(
+  return useFetch<Array<{ field: string, minutes: number }>>(
     `/top?field=${field}&minutes=${minutes}&limit=${limit}&${params.toString()}`,
   )
-  return res
 }

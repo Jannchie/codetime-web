@@ -1,5 +1,5 @@
 import type React from 'react'
-import { createContext, useCallback, useContext, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { sprintf } from 'sprintf-js'
 
 const i18nCtx = createContext<{ locate: string, setLocate: (locate: string) => void, data: Record<string, Record<string, string>> }>({
@@ -11,7 +11,17 @@ const i18nCtx = createContext<{ locate: string, setLocate: (locate: string) => v
 export type I18nData = Record<string, Record<string, string>>
 
 export function I18nProvider ({ children, defaultLocate, data }: React.PropsWithChildren<{ defaultLocate: string, data: I18nData }>) {
-  const [locate, setLocate] = useState(defaultLocate)
+  const defaultLocateLocal = localStorage.getItem('i18n.locate')
+  let defaultLocateFinal = defaultLocate
+  if (defaultLocateLocal) {
+    defaultLocateFinal = defaultLocateLocal
+  }
+  const [locate, setLocate] = useState(defaultLocateFinal)
+  useEffect(() => {
+    document.documentElement.lang = locate
+    localStorage.setItem('i18n.locate', locate)
+  }, [locate])
+
   return <i18nCtx.Provider value={{ locate, setLocate, data }}>{ children }</i18nCtx.Provider>
 }
 

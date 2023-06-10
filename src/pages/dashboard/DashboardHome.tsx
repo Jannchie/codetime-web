@@ -21,12 +21,13 @@ import { type CalData } from 'roku-charts/dist/types/configs'
 import { Link, useSearchParams } from 'react-router-dom'
 import getLanguageName from '../../utils/getLanguageName'
 import { CarbonInformation } from '@roku-ui/icons-carbon'
+import { useI18n } from '../../i18n'
 export function UserTop ({
   field,
   minutes = 60 * 24,
   limit = 5,
 }: {
-  field: 'platform' | 'language' | 'project'
+  field: string
   minutes?: number
   limit?: number
 }) {
@@ -99,6 +100,7 @@ export function UserPanel ({ minutes }: { minutes: number }) {
   const window = useWindowSize()
   const boolList = useBools(window.width < 1024 ? 30 : 60)
   const duration = useUserDuration(1000 * minutes * 60)
+  const { t } = useI18n()
   return (
     <Panel
       border
@@ -112,10 +114,10 @@ export function UserPanel ({ minutes }: { minutes: number }) {
         >
           { duration.data && (
             <div style={{ flexGrow: 1 }}>
-              { getDurationText(duration.data.minutes * 60 * 1000) }
-              { ' in the last ' }
-              { getDurationText(minutes * 60 * 1000) }
-              { '.\r' }
+              { t('%(duration)s in the last %(period)s', {
+                duration: getDurationText(duration.data.minutes * 60 * 1000),
+                period: getDurationText(minutes * 60 * 1000),
+              }) }
             </div>
           ) }
           <div style={{ flexGrow: 10 }} />
@@ -158,6 +160,7 @@ function useBools (minutes = 30) {
 
 export function DaysComponent () {
   const [days, setDays] = useState(1)
+  const { t } = useI18n()
   return (
     <Flex
       direction="column"
@@ -168,9 +171,9 @@ export function DaysComponent () {
           value={days}
           setValue={setDays}
         >
-          <Btn value={1}>{ 'Today' }</Btn>
-          <Btn value={7}>{ 'Week' }</Btn>
-          <Btn value={30}>{ '30 Days' }</Btn>
+          <Btn value={1}>{ t('Last 24 hours') }</Btn>
+          <Btn value={7}>{ t('Last 7 days') }</Btn>
+          <Btn value={30}>{ t('Last 30 days') }</Btn>
         </Btn.Group>
       </div>
       <UserPanel minutes={days * 24 * 60} />
@@ -179,15 +182,15 @@ export function DaysComponent () {
         direction={useWindowSize().width < 1024 ? 'column' : 'row'}
       >
         <UserTop
-          field="platform"
+          field={t('Platforms')}
           minutes={days * 24 * 60}
         />
         <UserTop
-          field="project"
+          field={t('Projects')}
           minutes={days * 24 * 60}
         />
         <UserTop
-          field="language"
+          field={t('Languages')}
           minutes={days * 24 * 60}
         />
       </Flex>
@@ -290,7 +293,7 @@ function ActivityChartPanel () {
       value: d.duration,
     }
   })
-
+  const { t } = useI18n()
   return (
     <Panel
       border
@@ -304,7 +307,7 @@ function ActivityChartPanel () {
           marginBottom: '0.5rem',
         }}
         >
-          { 'Recent Activity' }
+          { t('Recent Activity') }
         </div>
         <Flex
           style={{ position: 'relative' }}
@@ -328,7 +331,7 @@ function ActivityChartPanel () {
                   size="sm"
                   className="text-primary-2 monospace"
                 >
-                  Most day
+                  { t('The busiest day') }
                 </Text>
                 <div>
                   { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }
@@ -339,7 +342,7 @@ function ActivityChartPanel () {
                   size="sm"
                   className="text-primary-2 monospace"
                 >
-                  Total
+                  { t('Total') }
                 </Text>
                 <div>
                   { getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
@@ -350,7 +353,7 @@ function ActivityChartPanel () {
                   size="sm"
                   className="text-primary-2 monospace"
                 >
-                  Average
+                  { t('Average') }
                 </Text>
                 <div>
                   { getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
@@ -367,12 +370,12 @@ function ActivityChartPanel () {
                   size="sm"
                   className="text-primary-2 monospace"
                 >
-                  Most streak
+                  { t('Most streak') }
                 </Text>
                 <div>
                   { calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) }
                   { ' ' }
-                  { 'Days\r' }
+                  { t('Days') }
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
@@ -380,12 +383,12 @@ function ActivityChartPanel () {
                   size="sm"
                   className="text-primary-2 monospace"
                 >
-                  Current streak
+                  { t('Current streak') }
                 </Text>
                 <div>
                   { calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) }
                   { ' ' }
-                  { 'Days\r' }
+                  { t('Days') }
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }} />
@@ -434,6 +437,7 @@ function FilterList () {
 export function DashboardHome () {
   const [params] = useSearchParams()
   const data = useStats('days', 365 * 24 * 60, params.toString())
+  const { t } = useI18n()
   return (
     <Container style={{ padding: '1rem' }}>
       { data.data && data.data.data.length === 0 && <Notice
@@ -448,7 +452,9 @@ export function DashboardHome () {
           page and copy the token into the plugin.
         </>}
       /> }
-      <Typography.H1 className="monospace"> Dashboard </Typography.H1>
+      <Typography.H1 className="monospace">
+        { t('Dashboard') }
+      </Typography.H1>
       <Flex
         gap="1rem"
         direction="column"
