@@ -31,6 +31,7 @@ export function UserTop ({
   minutes?: number
   limit?: number
 }) {
+  const { t } = useI18n()
   const [params, setParams] = useSearchParams()
   const data = useUserTop(field, minutes, limit)
   let max: number = 0
@@ -49,7 +50,7 @@ export function UserTop ({
         marginBottom: '0.5rem',
       }}
       >
-        { capitalizeFirstLetter(field) }
+        { t(capitalizeFirstLetter(field) + 's') }
       </div>
       { data.data?.map((d) => {
         const selected = params.get(field) === d.field
@@ -182,15 +183,15 @@ export function DaysComponent () {
         direction={useWindowSize().width < 1024 ? 'column' : 'row'}
       >
         <UserTop
-          field={t('Platforms')}
+          field={'platform'}
           minutes={days * 24 * 60}
         />
         <UserTop
-          field={t('Projects')}
+          field={'project'}
           minutes={days * 24 * 60}
         />
         <UserTop
-          field={t('Languages')}
+          field={'language'}
           minutes={days * 24 * 60}
         />
       </Flex>
