@@ -67,7 +67,8 @@ export function Dashboard () {
                             return (
                               <Btn
                                 icon
-                                text
+                                variant="text"
+                                className={isActive ? 'text-primary-2' : ''}
                                 color={isActive ? 'primary' : 'default'}
                               >
                                 { d.icon }
