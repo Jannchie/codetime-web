@@ -41,8 +41,10 @@
   "Others": "Others",
   "Logout": "Logout",
   "Themes": "Themes",
-  "en": "en",
-  "zh-CN": "zh-CN",
+  "en": "English",
+  "zh-CN": "简体中文",
+  "zh-TW": "繁體中文",
+  "ja": "日本語",
   "Preferences": "Preferences",
   "": ""
 }

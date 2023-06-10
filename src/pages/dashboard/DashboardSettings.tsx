@@ -35,7 +35,7 @@ export function TokenPanel () {
             <TextField
               readOnly
               type={!hover ? 'password' : 'text'}
-              style={{ width: '100%', fontFamily: 'monospace' }}
+              style={{ fontFamily: 'monospace', flexGrow: 1 }}
               defaultValue={user.data.upload_token}
               value={undefined}
               onMouseEnter={() => { setHover(true) }}
@@ -122,6 +122,16 @@ export function ThemePanel () {
               value="zh-CN"
             >
               { t('zh-CN') }
+            </Btn>
+            <Btn
+              value="zh-TW"
+            >
+              { t('zh-TW') }
+            </Btn>
+            <Btn
+              value="ja"
+            >
+              { t('ja') }
             </Btn>
           </Btn.Group>
         </Flex>

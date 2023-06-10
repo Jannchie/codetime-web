@@ -7,12 +7,14 @@ import { RouterProvider } from 'react-router-dom'
 import { Notifications } from 'roku-ui'
 import { I18nProvider } from './i18n'
 import en from './i18n/data/en.json'
+import ja from './i18n/data/ja.json'
 import zhCN from './i18n/data/zh-CN.json'
+import zhTW from './i18n/data/zh-TW.json'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <I18nProvider
       defaultLocate="en"
-      data={{ en, 'zh-CN': zhCN }}
+      data={{ en, 'zh-CN': zhCN, 'zh-TW': zhTW, ja }}
     >
       <RouterProvider router={router} />
       <Notifications />
