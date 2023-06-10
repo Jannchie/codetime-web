@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { Anchor, Article, Btn, Flex, Panel, RokuProvider, useTheme } from 'roku-ui'
 import { setDefaultOptions } from 'date-fns'
 import { useI18n } from './i18n'
-import { zhCN, enUS, ja, zhTW } from 'date-fns/locale'
+import { zhCN, enUS, ja, zhTW, ptBR, id } from 'date-fns/locale'
 
 function CookiesConsent () {
   const [show, setShow] = useState(false)
@@ -21,6 +21,12 @@ function CookiesConsent () {
       break
     case 'ja':
       setDefaultOptions({ locale: ja })
+      break
+    case 'pt-BR':
+      setDefaultOptions({ locale: ptBR })
+      break
+    case 'id':
+      setDefaultOptions({ locale: id })
   }
 
   useEffect(() => {

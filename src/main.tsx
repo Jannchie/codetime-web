@@ -10,11 +10,12 @@ import en from './i18n/data/en.json'
 import ja from './i18n/data/ja.json'
 import zhCN from './i18n/data/zh-CN.json'
 import zhTW from './i18n/data/zh-TW.json'
+import ptBR from './i18n/data/pt-BR.json'
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <I18nProvider
       defaultLocate="en"
-      data={{ en, 'zh-CN': zhCN, 'zh-TW': zhTW, ja }}
+      data={{ en, 'zh-CN': zhCN, 'zh-TW': zhTW, ja, 'pt-BR': ptBR }}
     >
       <RouterProvider router={router} />
       <Notifications />

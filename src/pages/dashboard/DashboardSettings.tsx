@@ -10,6 +10,7 @@ import {
   Anchor,
   useTheme,
   Modal,
+  Select,
 } from 'roku-ui'
 import { deleteRecords, useMutationFetch, useUserData } from '../../api'
 import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
@@ -109,31 +110,18 @@ export function ThemePanel () {
             </Btn.Group>
           </div>
           <div className="text-lg">{ t('Languages') }</div>
-          <Btn.Group
-            value={locate}
-            setValue={setLocate}
-          >
-            <Btn
-              value="en"
-            >
-              { t('en') }
-            </Btn>
-            <Btn
-              value="zh-CN"
-            >
-              { t('zh-CN') }
-            </Btn>
-            <Btn
-              value="zh-TW"
-            >
-              { t('zh-TW') }
-            </Btn>
-            <Btn
-              value="ja"
-            >
-              { t('ja') }
-            </Btn>
-          </Btn.Group>
+          <Select
+            defaultValue={{ value: locate }}
+            options={[
+              { value: 'en', label: 'English' },
+              { value: 'zh-CN', label: '简体中文' },
+              { value: 'zh-TW', label: '繁體中文' },
+              { value: 'ja', label: '日本語' },
+              { value: 'pt-BR', label: 'Português (Brasil)' },
+            ]}
+            getKey={(d: { value: string }) => { return t(d.value) }}
+            setValue={(d: { value: string }) => { setLocate(d.value) }}
+          />
         </Flex>
       </>
     </Panel>

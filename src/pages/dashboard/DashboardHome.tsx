@@ -312,7 +312,6 @@ function ActivityChartPanel () {
         padding: '1rem',
         flexGrow: 1,
         flexBasis: 0,
-        minHeight: '200px',
       }}
     >
       <Flex direction="column">
