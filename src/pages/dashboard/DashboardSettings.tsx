@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Flex,
   Container,
@@ -83,6 +83,9 @@ export function TokenPanel () {
 export function ThemePanel () {
   const { theme, setTheme } = useTheme()
   const { t, locate, setLocate } = useI18n()
+  const getKey = useCallback((lang: string) => {
+    return t(lang)
+  }, [t])
   return (
     <Panel
       border
@@ -111,17 +114,17 @@ export function ThemePanel () {
           </div>
           <div className="text-lg">{ t('Languages') }</div>
           <div>
-            <Select
-              defaultValue={{ value: locate }}
+            <Select<{ lang: string, label: string }>
+              defaultValue={{ lang: locate, label: getKey(locate) }}
               options={[
-                { value: 'en', label: 'English' },
-                { value: 'zh-CN', label: '简体中文' },
-                { value: 'zh-TW', label: '繁體中文' },
-                { value: 'ja', label: '日本語' },
-                { value: 'pt-BR', label: 'Português (Brasil)' },
+                { lang: 'en', label: 'English' },
+                { lang: 'zh-CN', label: '简体中文' },
+                { lang: 'zh-TW', label: '繁體中文' },
+                { lang: 'ja', label: '日本語' },
+                { lang: 'pt-BR', label: 'Português Brasileiro' },
               ]}
-              getKey={(d: { value: string }) => { return t(d.value) }}
-              setValue={(d: { value: string }) => { setLocate(d.value) }}
+              getKey={(d) => d.label}
+              setValue={d => { setLocate(d.lang) }}
             />
             {
               locate === 'en' && (
