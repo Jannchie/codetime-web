@@ -14,7 +14,7 @@ import {
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
-import { getDurationText } from '../../utils/getDurationText'
+import { getDurationString } from '../../utils/getDurationText'
 import { getTimestampList, useWindowSize } from '../../utils/getTimestampList'
 import * as d3 from 'd3'
 import { type CalData } from 'roku-charts/dist/types/configs'
@@ -41,7 +41,12 @@ export function UserTop ({
   return (
     <Panel
       border
-      style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}
+      style={{
+        padding: '1rem',
+        flexGrow: 1,
+        flexBasis: '0px',
+        flexShrink: 0,
+      }}
     >
       <div style={{
         fontFamily: '"Share Tech Mono", monospace',
@@ -71,10 +76,15 @@ export function UserTop ({
           >
             <Flex
               gap="1rem"
-              style={{ width: '100%', justifyContent: 'space-between' }}
+              className="text-sm"
+              style={{
+                justifyContent: 'space-between',
+              }}
             >
-              <div>{ field === 'language' ? getLanguageName(d.field) : d.field }</div>
-              <div>{ getDurationText(d.minutes * 60 * 1000) }</div>
+              <div>
+                { field === 'language' ? getLanguageName(d.field) : d.field }
+              </div>
+              <div>{ getDurationString(d.minutes * 60 * 1000) }</div>
             </Flex>
             <div
               className="bg-background-3"
@@ -116,8 +126,8 @@ export function UserPanel ({ minutes }: { minutes: number }) {
           { duration.data && (
             <div style={{ flexGrow: 1 }}>
               { t('%(duration)s in the last %(period)s', {
-                duration: getDurationText(duration.data.minutes * 60 * 1000),
-                period: getDurationText(minutes * 60 * 1000),
+                duration: getDurationString(duration.data.minutes * 60 * 1000),
+                period: getDurationString(minutes * 60 * 1000),
               }) }
             </div>
           ) }
@@ -262,7 +272,7 @@ function CalChartComp ({ data, theme }: { data: CalData[], theme?: string }) {
         chart.current.draw({
           durationDays: 365,
           tooltipFormatter: (d: CalData) => {
-            return `<b>${d.date}</b> </br> ${d.value ? getDurationText(d.value) : getDurationText(0)}`
+            return `<b>${d.date}</b> </br> ${d.value ? getDurationString(d.value) : getDurationString(0)}`
           },
         })
       } catch (e) {
@@ -298,7 +308,12 @@ function ActivityChartPanel () {
   return (
     <Panel
       border
-      style={{ padding: '1rem', flexGrow: 1, flexBasis: 0 }}
+      style={{
+        padding: '1rem',
+        flexGrow: 1,
+        flexBasis: 0,
+        minHeight: '200px',
+      }}
     >
       <Flex direction="column">
         <div style={{
@@ -335,7 +350,7 @@ function ActivityChartPanel () {
                   { t('The busiest day') }
                 </Text>
                 <div>
-                  { getDurationText(Math.max(...calData?.map(d => d.value) ?? [])) }
+                  { getDurationString(Math.max(...calData?.map(d => d.value) ?? [0])) }
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
@@ -346,7 +361,7 @@ function ActivityChartPanel () {
                   { t('Total') }
                 </Text>
                 <div>
-                  { getDurationText(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
+                  { getDurationString(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
@@ -357,7 +372,7 @@ function ActivityChartPanel () {
                   { t('Average') }
                 </Text>
                 <div>
-                  { getDurationText(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
+                  { getDurationString(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
                 </div>
               </div>
             </Flex>

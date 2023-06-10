@@ -8,6 +8,7 @@ import {
   Panel,
   Btn,
   pushNotice,
+  Select,
 } from 'roku-ui'
 import { useUserData } from '../../api'
 import { useWindowSize } from '../../utils/getTimestampList'
@@ -52,13 +53,21 @@ export function ShieldPanel ({ uid }: { uid: number }) {
   const [obj, setObj] = useState<{
     project: string
     days: string
-    style: string
     color: string
-  }>({ project: '', days: '', style: 'social', color: '' })
+  }>({ project: '', days: '', color: '' })
   let days = Number.parseInt(obj.days)
   if (isNaN(days)) days = 0
-  const link = `https://img.shields.io/endpoint?style=${obj.style}${obj.color !== '' ? `&color=${obj.color}` : ''}&url=https%3A%2F%2Fapi.codetime.dev%2Fshield%3Fid%3D${uid}%26project%3D${obj.project}%26in%3D${days * 86400000}`
   const { t } = useI18n()
+  const options = [
+    { value: 'social', label: 'Social' },
+    { value: 'flat', label: 'Flat' },
+    { value: 'flat-square', label: 'Flat Square' },
+    { value: 'plastic', label: 'Plastic' },
+    { value: 'for-the-badge', label: 'For The Badge' },
+  ]
+  const [style, setStyle] = useState(options[0])
+  const link = `https://img.shields.io/endpoint?style=${style.value}${obj.color !== '' ? `&color=${obj.color}` : ''}&url=https%3A%2F%2Fapi.codetime.dev%2Fshield%3Fid%3D${uid}%26project%3D${obj.project}%26in%3D${days * 86400000}`
+
   return (
     <Panel
       border
@@ -102,11 +111,13 @@ export function ShieldPanel ({ uid }: { uid: number }) {
             setValue={(v) => { setObj({ ...obj, days: v }) }}
             placeholder={t('Days')}
           />
-          <TextField
+          <Select
+            color="primary"
             style={{ flexGrow: 1 }}
-            value={obj.style}
-            setValue={(v) => { setObj({ ...obj, style: v }) }}
-            placeholder={t('Style')}
+            options={options}
+            defaultValue={style}
+            getKey={d => d.label}
+            setValue={setStyle}
           />
           <TextField
             style={{ flexGrow: 1 }}

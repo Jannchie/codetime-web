@@ -1,9 +1,22 @@
 import { useEffect, useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Anchor, Article, Btn, Flex, Panel, RokuProvider, useTheme } from 'roku-ui'
+import { setDefaultOptions } from 'date-fns'
+import { useI18n } from './i18n'
+import { zhCN, enUS } from 'date-fns/locale'
 
 function CookiesConsent () {
   const [show, setShow] = useState(false)
+
+  const { locate } = useI18n()
+  switch (locate) {
+    case 'zh-CN':
+      setDefaultOptions({ locale: zhCN })
+      break
+    case 'en':
+      setDefaultOptions({ locale: enUS })
+  }
+
   useEffect(() => {
     const consent = localStorage.getItem('codetime.cookie-consent')
     if (!consent) {

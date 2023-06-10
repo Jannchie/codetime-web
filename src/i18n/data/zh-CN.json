@@ -15,7 +15,7 @@
   "Average": "平均",
   "Most streak": "最长连续",
   "Current streak": "当前连续",
-  "%(duration)s in the last %(period)s": "在最近的 %(period)s 里，合计编程时间为 %(duration)s ",
+  "%(duration)s in the last %(period)s": "在最近的 %(period)s里，合计编程时间为 %(duration)s",
   "Today": "今天",
   "Days": "天",
   "Last 24 hours": "今天",
