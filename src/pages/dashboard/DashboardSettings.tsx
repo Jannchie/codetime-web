@@ -110,18 +110,36 @@ export function ThemePanel () {
             </Btn.Group>
           </div>
           <div className="text-lg">{ t('Languages') }</div>
-          <Select
-            defaultValue={{ value: locate }}
-            options={[
-              { value: 'en', label: 'English' },
-              { value: 'zh-CN', label: '简体中文' },
-              { value: 'zh-TW', label: '繁體中文' },
-              { value: 'ja', label: '日本語' },
-              { value: 'pt-BR', label: 'Português (Brasil)' },
-            ]}
-            getKey={(d: { value: string }) => { return t(d.value) }}
-            setValue={(d: { value: string }) => { setLocate(d.value) }}
-          />
+          <div>
+            <Select
+              defaultValue={{ value: locate }}
+              options={[
+                { value: 'en', label: 'English' },
+                { value: 'zh-CN', label: '简体中文' },
+                { value: 'zh-TW', label: '繁體中文' },
+                { value: 'ja', label: '日本語' },
+                { value: 'pt-BR', label: 'Português (Brasil)' },
+              ]}
+              getKey={(d: { value: string }) => { return t(d.value) }}
+              setValue={(d: { value: string }) => { setLocate(d.value) }}
+            />
+            {
+              locate === 'en' && (
+                <div
+                  className="text-frontground-3 text-sm"
+                  style={{ marginTop: '0.25rem' }}
+                >
+                  { t('If there\'s no language you use, why not get involved and contribute to the project? ') }
+                  <Anchor
+                    href="https://github.com/Jannchie/codetime-web"
+                    target="_blank"
+                  >
+                    { 'github.com/Jannchie/codetime-web' }
+                  </Anchor>
+                </div>
+              )
+            }
+          </div>
         </Flex>
       </>
     </Panel>
