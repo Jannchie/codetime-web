@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-curly-brace-presence */
-import markdown from 'markdown-to-jsx'
+import Markdown from 'markdown-to-jsx'
 import { Article } from 'roku-ui'
 
 export function Commerce () {
   return (
     <Article>
-      <markdown>
+      <Markdown>
         { `## 特定商取引法（通信販売）に基づく表示
 当サイトで取り扱う商品・サービスのうち、当社が販売者の商品・サービス（当社が提供するサービスに限る）について、「特定商取引に関する法律」第11条に基づき、次のとおり明示します。
 
@@ -68,7 +68,7 @@ CodeTime
 商品・サービス毎に必要に応じて動作環境を表示します。
 
 2023年2月20日 制定` }
-      </markdown>
+      </Markdown>
     </Article>
   )
 }

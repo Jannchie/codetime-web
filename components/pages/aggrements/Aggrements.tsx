@@ -1,7 +1,6 @@
-import { Outlet } from 'react-router-dom'
 import { Flex } from 'roku-ui'
 
-export function Aggrements () {
+export function Aggrements ({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Flex
@@ -16,7 +15,7 @@ export function Aggrements () {
           />
         </a>
       </Flex>
-      <Outlet />
+      { children }
     </>
   )
 }
