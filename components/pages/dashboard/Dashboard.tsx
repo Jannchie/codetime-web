@@ -67,8 +67,7 @@ export function Dashboard ({ children }: { children?: React.ReactNode }) {
                         <Btn
                           icon
                           variant="text"
-                          className={pathname === d.to ? 'text-primary-2' : 'text-frontground-2'}
-                          color={pathname === d.to ? 'primary' : 'default'}
+                          color={pathname.endsWith(d.to) ? 'primary' : 'default'}
                         >
                           { d.icon }
                         </Btn>
