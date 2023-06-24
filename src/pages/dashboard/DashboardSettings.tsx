@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react'
 import {
   Flex,
   Container,
-  Typography,
+  T,
   pushNotice,
   TextField,
   Panel,
@@ -11,13 +11,16 @@ import {
   useTheme,
   Modal,
   Select,
+  ToggleGroup,
 } from 'roku-ui'
 import { deleteRecords, useMutationFetch, useUserData } from '../../api'
 import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
 import { useI18n } from '../../i18n'
+import { useDebounce } from 'usehooks-ts'
 export function TokenPanel () {
   const user = useUserData()
   const [hover, setHover] = useState(false)
+  const debounceHover = useDebounce(hover, 1000)
   const { t } = useI18n()
   return (
     <Panel
@@ -35,7 +38,7 @@ export function TokenPanel () {
           <Flex gap="1rem">
             <TextField
               readOnly
-              type={!hover ? 'password' : 'text'}
+              type={hover && debounceHover ? 'text' : 'password'}
               style={{ fontFamily: 'monospace', flexGrow: 1 }}
               defaultValue={user.data.upload_token}
               value={undefined}
@@ -104,13 +107,12 @@ export function ThemePanel () {
         >
           <div>
             <div className="text-lg">{ t('Themes') }</div>
-            <Btn.Group
+            <ToggleGroup
               value={theme}
               setValue={setTheme}
-            >
-              <Btn value="dark" >{ t('Dark') }</Btn>
-              <Btn value="light" >{ t('Light') }</Btn>
-            </Btn.Group>
+              data={['dark', 'light', 'system']}
+              body={(d) => t(d)}
+            />
           </div>
           <div className="text-lg">{ t('Languages') }</div>
           <div>
@@ -176,7 +178,7 @@ function DangerPanel () {
         }}
       >
         <Flex gap="0.5rem">
-          <CarbonTrashCan width="20px" />
+          <CarbonTrashCan width="1em" />
           { t('Distory All My Records') }
         </Flex>
       </Btn>
@@ -198,8 +200,8 @@ function ConfirmModal ({ setShow }: { setShow: (show: boolean) => void }) {
       border
       style={{ padding: '1rem' }}
     >
-      <Typography.H4>{ 'Are you sure?' }</Typography.H4>
-      <Typography.P>{ 'This operation is irreversible. All your records will be deleted.' }</Typography.P>
+      <T.H4>{ 'Are you sure?' }</T.H4>
+      <T.P>{ 'This operation is irreversible. All your records will be deleted.' }</T.P>
       <div>
         <TextField
           style={{ width: '100%' }}
@@ -269,7 +271,7 @@ function LogoutPanel () {
         }}
       >
         <Flex gap="0.5rem">
-          <CarbonLogout width="20px" />
+          <CarbonLogout width="1em" />
           { t('Logout') }
         </Flex>
       </Btn>
@@ -280,9 +282,9 @@ export function DashboardSettings () {
   const { t } = useI18n()
   return (
     <Container style={{ padding: '1rem' }}>
-      <Typography.H1 className="monospace">
+      <T.H1 className="monospace">
         { t('Settings') }
-      </Typography.H1>
+      </T.H1>
       <Flex
         gap="1rem"
         direction="column"

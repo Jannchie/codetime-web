@@ -3,7 +3,7 @@ import { useState } from 'react'
 import {
   Flex,
   Container,
-  Typography,
+  T,
   TextField,
   Panel,
   Btn,
@@ -85,14 +85,14 @@ export function ShieldPanel ({ uid }: { uid: number }) {
           align="center"
           gap="1rem"
         >
-          <span style={{ minWidth: '90px' }}>{ t('Markdown') }</span>
+          <span style={{ minWidth: '100px' }}>{ t('Markdown') }</span>
           <ClipableTextField text={`[![CodeTime badge](${link})](https://codetime.dev)`} />
         </Flex>
         <Flex
           align="center"
           gap="1rem"
         >
-          <span style={{ minWidth: '90px' }}>{ t('HTML') }</span>
+          <span style={{ minWidth: '100px' }}>{ t('HTML') }</span>
           <ClipableTextField text={`<img href="https://codetime.dev" alt="Custom badge" src="${link}">`} />
         </Flex>
         <Flex
@@ -137,9 +137,9 @@ export function DashboardShields () {
   const uid = user.data?.id
   return (
     <Container style={{ padding: '1rem' }}>
-      <Typography.H1 className="monospace">
+      <T.H1 className="monospace">
         { t('Shields') }
-      </Typography.H1>
+      </T.H1>
       <Flex
         gap="1rem"
         direction="column"

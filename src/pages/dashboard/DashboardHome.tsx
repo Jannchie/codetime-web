@@ -4,13 +4,12 @@ import {
   Flex,
   Container,
   Panel,
-  Typography,
+  T,
   Anchor,
-  Btn,
-  Text,
   useTheme,
   Notice,
   Tag,
+  ToggleGroup,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
@@ -63,7 +62,7 @@ export function UserTop ({
           <Flex
             key={d.field}
             direction="column"
-            style={{ paddingBottom: '0.5rem', cursor: 'pointer', fontWeight: selected ? 'bold' : 'normal', color: selected ? 'hsl(var(--r-primary-2))' : 'hsl(var(--r-fontground-2))', transition: 'all 0.15s ease-in-out' }}
+            style={{ paddingBottom: '0.5rem', cursor: 'pointer', fontWeight: selected ? 'bold' : 'normal', color: selected ? 'hsl(var(--r-primary-2))' : 'hsl(var(--r-frontground-2))', transition: 'all 0.15s ease-in-out' }}
             onClick={() => {
               if (selected) {
                 params.delete(field)
@@ -91,7 +90,7 @@ export function UserTop ({
               style={{ borderRadius: '1px' }}
             >
               <div
-                className="bg-primary-2"
+                className="bg-[hsl(var(--r-primary))]"
                 style={{
                   height: '2px',
                   width: `${(d.minutes / max) * 100}%`,
@@ -177,16 +176,23 @@ export function DaysComponent () {
       direction="column"
       gap="1rem"
     >
-      <div>
-        <Btn.Group
+      <Panel
+        padding
+        border
+      >
+        <ToggleGroup
           value={days}
           setValue={setDays}
-        >
-          <Btn value={1}>{ t('Last 24 hours') }</Btn>
-          <Btn value={7}>{ t('Last 7 days') }</Btn>
-          <Btn value={30}>{ t('Last 30 days') }</Btn>
-        </Btn.Group>
-      </div>
+          data={[1, 7, 30]}
+          body={(d) => {
+            switch (d) {
+              case 1: return t('Last 24 hours')
+              case 7: return t('Last 7 days')
+              case 30: return t('Last 30 days')
+            }
+          }}
+        />
+      </Panel>
       <UserPanel minutes={days * 24 * 60} />
       <Flex
         gap="1rem"
@@ -342,34 +348,31 @@ function ActivityChartPanel () {
               style={{ width: '100%' }}
             >
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                <Text
-                  size="sm"
-                  className="text-primary-2 monospace"
+                <T.P
+                  color="primary"
                 >
                   { t('The busiest day') }
-                </Text>
+                </T.P>
                 <div>
                   { getDurationString(Math.max(...calData?.map(d => d.value) ?? [0])) }
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                <Text
-                  size="sm"
-                  className="text-primary-2 monospace"
+                <T.P
+                  className="text-[hsl(var(--r-primary-2))] monospace"
                 >
                   { t('Total') }
-                </Text>
+                </T.P>
                 <div>
                   { getDurationString(calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) }
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                <Text
-                  size="sm"
-                  className="text-primary-2 monospace"
+                <T.P
+                  className="text-[hsl(var(--r-primary-2))] monospace"
                 >
                   { t('Average') }
-                </Text>
+                </T.P>
                 <div>
                   { getDurationString(((calData?.reduce((acc, d) => acc + d.value, 0) ?? 0) / (calData?.length ?? 1)) ?? 0) }
                 </div>
@@ -381,12 +384,11 @@ function ActivityChartPanel () {
               style={{ width: '100%' }}
             >
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                <Text
-                  size="sm"
-                  className="text-primary-2 monospace"
+                <T.P
+                  className="text-[hsl(var(--r-primary-2))] monospace"
                 >
                   { t('Most streak') }
-                </Text>
+                </T.P>
                 <div>
                   { calculateStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) }
                   { ' ' }
@@ -394,12 +396,11 @@ function ActivityChartPanel () {
                 </div>
               </div>
               <div style={{ flexGrow: 1, flexBasis: 0 }}>
-                <Text
-                  size="sm"
-                  className="text-primary-2 monospace"
+                <T.Caption
+                  className="text-[hsl(var(--r-primary-2))] monospace"
                 >
                   { t('Current streak') }
-                </Text>
+                </T.Caption>
                 <div>
                   { calculateCurrentStreak(calData?.filter(d => d.value > 0).map(d => new Date(d.date)) ?? []) }
                   { ' ' }
@@ -467,9 +468,9 @@ export function DashboardHome () {
           page and copy the token into the plugin.
         </>}
       /> }
-      <Typography.H1 className="monospace">
+      <T.H1 className="monospace">
         { t('Dashboard') }
-      </Typography.H1>
+      </T.H1>
       <Flex
         gap="1rem"
         direction="column"

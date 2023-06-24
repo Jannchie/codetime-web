@@ -11,21 +11,27 @@ function CookiesConsent () {
   const { locate } = useI18n()
   switch (locate) {
     case 'zh-CN':
+      document.title = 'CodeTime - 追迹你的编程时长'
       setDefaultOptions({ locale: zhCN })
       break
     case 'zh-TW':
+      document.title = 'CodeTime - 追蹤你的編程時長'
       setDefaultOptions({ locale: zhTW })
       break
     case 'en':
+      document.title = 'CodeTime - Track your coding time'
       setDefaultOptions({ locale: enUS })
       break
     case 'ja':
+      document.title = 'CodeTime - コーディング時間を追跡する'
       setDefaultOptions({ locale: ja })
       break
     case 'pt-BR':
+      document.title = 'CodeTime - Rastreie seu tempo de codificação'
       setDefaultOptions({ locale: ptBR })
       break
     case 'id':
+      document.title = 'CodeTime - Lacak waktu coding Anda'
       setDefaultOptions({ locale: id })
   }
 

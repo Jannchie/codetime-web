@@ -1,6 +1,6 @@
 import { type ReactNode, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Btn, Container, Footer, useTheme, Text, usePrefersColorScheme } from 'roku-ui'
+import { Btn, Container, Footer, useTheme, usePrefersColorScheme, T } from 'roku-ui'
 import { useUserData } from '../api'
 import { useI18n } from '../i18n'
 
@@ -60,32 +60,28 @@ export function Home () {
             colorStart="#888"
             colorEnd={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}
           >
-            <Text size="xxl">
+            <T.H1>
               Code.
-            </Text>
+            </T.H1>
           </AwesomeText>
           <AwesomeText
             colorStart={theme === 'light' ? 'hsl(var(--r-frontground-1))' : 'hsl(var(--r-background-3))'}
             colorEnd="#2980B9"
           >
-            <Text
-              weight="bold"
-              size="xxl"
-            >
+            <T.H1 >
               Time
-            </Text>
+            </T.H1>
           </AwesomeText>
         </div>
         <div
           className="text-frontground-3"
           style={{ maxWidth: '60ch', paddingTop: '1rem' }}
         >
-          <Text size="sm">
+          <T.Caption>
             { t('A productivity tool for software developers. It helps developers track the amount of time they spend on coding projects, and provides insights into their coding habits and productivity.') }
-          </Text>
+          </T.Caption>
         </div>
         <Btn
-          gloryColor="linear-gradient(to right, #6a11cb 0%, #2575fc 100%)"
           size="lg"
           style={{
             marginTop: '3rem',
