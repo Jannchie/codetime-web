@@ -4,7 +4,7 @@ import { Appbar, Avatar, Btn, Flex, HolyGrail, Panel, useTheme } from 'roku-ui'
 import { useUserData } from '../../api'
 import { usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
-
+import { TablerBrandGithub } from '@roku-ui/icons-tabler'
 export function AvatarComponent () {
   const user = useUserData()
   return (
@@ -34,6 +34,7 @@ export function Dashboard ({ children }: { children?: React.ReactNode }) {
   return (
     <div className="App">
       <HolyGrail
+        style={{ height: '100vh' }}
         header={<Appbar
           border
           style={{ zIndex: 1 }}
@@ -80,6 +81,25 @@ export function Dashboard ({ children }: { children?: React.ReactNode }) {
           </Flex>
           { children }
         </>}
+        footer={<div
+          className="rounded-none p-2 mt-10"
+        >
+          <div className="text-sm text-center">
+            <Btn
+              icon
+              text
+              as={Link}
+              color="default"
+              href={'https://github.com/datreks'}
+              target="_blank"
+            >
+              <TablerBrandGithub />
+            </Btn>
+          </div>
+          <div className="text-center text-frontground-3 text-sm">
+            { `Datreks @ ${new Date().getFullYear()}, All rights reserved.` }
+          </div>
+        </div>}
       />
     </div>
   )

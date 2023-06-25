@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@roku-ui/icons-carbon": "^11.18.0",
+    "@roku-ui/icons-tabler": "^2.17.0",
     "@types/negotiator": "^0.6.1",
     "@types/node": "^20.3.1",
     "@types/sprintf-js": "^1.1.2",
