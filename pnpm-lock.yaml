@@ -51,8 +51,8 @@ dependencies:
     specifier: ^0.3.5
     version: 0.3.5(d3@7.8.5)
   roku-ui:
-    specifier: ^0.14.0
-    version: 0.14.0(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^0.14.1
+    version: 0.14.1(react-dom@18.2.0)(react@18.2.0)
   sprintf-js:
     specifier: ^1.1.2
     version: 1.1.2
@@ -2696,8 +2696,8 @@ packages:
       d3: 7.8.5
     dev: false
 
-  /roku-ui@0.14.0(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-wiwCvR948pm28ALLqVgcjLobW91YjBtfWoHXzsWvKbnucvmfhXmvJblGf5BzxOpvf/QW+tpGIFfTC6kSOSs3zw==}
+  /roku-ui@0.14.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ffLqiUE1FryM/mjYS3Ldg5vswE3+fRP/xk4t5sMShYXvlFm+vXfJ1rgGyYPhajlBdywvoIYYeLBBF+DqBt2TPA==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
