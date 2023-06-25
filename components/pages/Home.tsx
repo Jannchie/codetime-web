@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useState } from 'react'
-import { Btn, Container, Footer, useTheme, usePrefersColorScheme, T } from 'roku-ui'
+import { Btn, Container, Footer, T, useTrueTheme } from 'roku-ui'
 import { baseURL, useUserData } from '../api'
 import { useI18n } from '../i18n'
 import { useRouter } from 'next/navigation'
@@ -25,15 +25,6 @@ export function AwesomeText ({ children, colorStart, colorEnd }: { children?: Re
       { children }
     </div>
   )
-}
-
-function useTrueTheme () {
-  const { theme } = useTheme()
-  const preferTheme = usePrefersColorScheme()
-  if (theme === 'system') {
-    return preferTheme
-  }
-  return theme
 }
 
 export function Home () {

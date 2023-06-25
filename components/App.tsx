@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useState } from 'react'
-import { Anchor, Article, Btn, Flex, Panel } from 'roku-ui'
+import { Anchor, Btn, Flex, Panel } from 'roku-ui'
 
 function CookiesConsent () {
   const [show, setShow] = useState(false)
@@ -24,7 +24,7 @@ function CookiesConsent () {
           fontSize: '0.8rem',
         }}
         >
-          <Article>
+          <div>
             { 'We use cookies to track user information and enable you to stay logged in. ' }
             { 'You can disable data collection and cookies by changing your browser settings, but this may affect the functionality of this site. ' }
             { 'We may use cookies in accordance with our ' }
@@ -36,7 +36,7 @@ function CookiesConsent () {
               { 'Terms of Use' }
             </Anchor>
             { ' if you have consented, and you may adjust or withdraw your consent at any time.' }
-          </Article>
+          </div>
         </div>
         <Flex
           gap="1rem"

@@ -28,7 +28,7 @@ export function getData (locale: string) {
 }
 
 export async function generateMetadata (
-  { params, searchParams }: { params: { lang: string }, searchParams: URLSearchParams },
+  { params }: { params: { lang: string }, searchParams: URLSearchParams },
 ): Promise<Metadata> {
   // read route params
 
@@ -94,7 +94,13 @@ export default function Layout ({
 }) {
   const data = getData(lang)
   const cookieStore = cookies()
-  const cookieTheme = cookieStore.get('roku.theme')?.value ?? 'dark'
+  let cookieTheme = cookieStore.get('roku.theme')?.value
+  if (!cookieTheme || cookieTheme === '') {
+    cookieTheme = cookieStore.get('roku.theme.default')?.value
+  }
+  if (!cookieTheme || cookieTheme === '') {
+    cookieTheme = 'dark'
+  }
   return (
     <html
       lang={lang}

@@ -5,10 +5,10 @@ import {
   Container,
   Panel,
   T,
-  useTheme,
   Notice,
   Tag,
   ToggleGroup,
+  useTrueTheme,
 } from 'roku-ui'
 import { useStats, useUserTop, useUserData, useUserDuration } from '../../api'
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter'
@@ -302,7 +302,7 @@ function CalChartComp ({ data, theme }: { data: CalData[], theme?: string }) {
 }
 
 function ActivityChartPanel () {
-  const { theme } = useTheme()
+  const theme = useTrueTheme()
   const params = useSearchParams()
   const data = useStats('days', 365 * 24 * 60, params?.toString())
   const calData = data.data?.data.map(d => {

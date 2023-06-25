@@ -1,8 +1,10 @@
-import { Article } from 'roku-ui'
+'use client'
+import { Article, useTrueTheme } from 'roku-ui'
 
 export function PrivacyPolicy () {
+  const theme = useTrueTheme()
   return (
-    <Article>
+    <Article className={theme === 'dark' ? 'prose-invert' : ''}>
       <h1>{ 'Privacy Policy' }</h1>
       <p>{ 'Last updated: February 19, 2023' }</p>
       <p>{ 'This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.' }</p>

@@ -1,7 +1,8 @@
-import { Article } from 'roku-ui'
+import { Article, useTrueTheme } from 'roku-ui'
 export function TermsOfUse () {
+  const theme = useTrueTheme()
   return (
-    <Article>
+    <Article className={theme === 'dark' ? 'prose-invert' : ''}>
       <h1>{ 'Website Terms of Use' }</h1>
       <p>{ 'Version 1.0' }</p>
       <p>

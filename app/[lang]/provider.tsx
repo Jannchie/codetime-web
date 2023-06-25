@@ -1,9 +1,22 @@
 'use client'
-import { RokuProvider } from 'roku-ui'
+import { Notifications, RokuProvider } from 'roku-ui'
 import { enUS, ja, zhCN, zhTW, ptBR } from 'date-fns/locale'
 import { useEffect } from 'react'
 import { setDefaultOptions } from 'date-fns'
 import { useParams } from 'next/navigation'
+import { App } from '../../components/App'
+
+function AppWrapper (props: { children: React.ReactNode }) {
+  return (
+    <App>
+      <>
+        <Notifications className="z-50" />
+        { props.children }
+      </>
+    </App>
+  )
+}
+
 export function Provider ({ children }: { children: React.ReactNode }) {
   const { lang: locale } = useParams()
   useEffect(() => {
@@ -27,9 +40,10 @@ export function Provider ({ children }: { children: React.ReactNode }) {
         setDefaultOptions({ locale: enUS })
     }
   }, [locale])
+
   return (
-    <RokuProvider>
-      { children }
+    <RokuProvider useNotifications={false}>
+      <AppWrapper >{ children }</AppWrapper>
     </RokuProvider>
   )
 }

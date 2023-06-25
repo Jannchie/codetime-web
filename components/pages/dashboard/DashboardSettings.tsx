@@ -12,6 +12,7 @@ import {
   Modal,
   Select,
   ToggleGroup,
+  ThemeToggle,
 } from 'roku-ui'
 import { deleteRecords, useMutationFetch, useUserData } from '../../api'
 import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
@@ -110,11 +111,10 @@ export function ThemePanel () {
       >
         <div>
           <div className="text-lg">{ t('themes') }</div>
+          <ThemeToggle />
           <ToggleGroup
             value={theme}
-            setValue={(d) => {
-              setTheme(d)
-            }}
+            setValue={setTheme}
             data={['dark', 'light', 'system']}
             body={(d) => t(d)}
           />

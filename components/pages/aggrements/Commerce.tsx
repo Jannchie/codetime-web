@@ -1,10 +1,11 @@
 /* eslint-disable react/jsx-curly-brace-presence */
 import Markdown from 'markdown-to-jsx'
-import { Article } from 'roku-ui'
+import { Article, useTrueTheme } from 'roku-ui'
 
 export function Commerce () {
+  const theme = useTrueTheme()
   return (
-    <Article>
+    <Article className={theme === 'dark' ? 'prose-invert' : ''}>
       <Markdown>
         { `## 特定商取引法（通信販売）に基づく表示
 当サイトで取り扱う商品・サービスのうち、当社が販売者の商品・サービス（当社が提供するサービスに限る）について、「特定商取引に関する法律」第11条に基づき、次のとおり明示します。
