@@ -2,7 +2,7 @@ import { CarbonBadge, CarbonDashboard, CarbonToolKit } from '@roku-ui/icons-carb
 import { useEffect } from 'react'
 import { Appbar, Avatar, Btn, Flex, HolyGrail, Panel, useTheme } from 'roku-ui'
 import { useUserData } from '../../api'
-import { usePathname, useRouter } from 'next/navigation'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { TablerBrandGithub } from '@roku-ui/icons-tabler'
 export function AvatarComponent () {
@@ -27,6 +27,7 @@ export function Dashboard ({ children }: { children?: React.ReactNode }) {
   const user = useUserData()
   const router = useRouter()
   const pathname = usePathname()
+  const { lang } = useParams()
   useEffect(() => {
     // trigger browser debug
     if (!user.data && !user.isLoading) router.push('/')
@@ -56,9 +57,9 @@ export function Dashboard ({ children }: { children?: React.ReactNode }) {
               <Flex >
                 {
                   [
-                    { to: '/dashboard', icon: <CarbonDashboard /> },
-                    { to: '/dashboard/shields', icon: <CarbonBadge /> },
-                    { to: '/dashboard/settings', icon: <CarbonToolKit /> },
+                    { to: `/${lang}/dashboard`, icon: <CarbonDashboard /> },
+                    { to: `/${lang}/dashboard/shields`, icon: <CarbonBadge /> },
+                    { to: `/${lang}/dashboard/settings`, icon: <CarbonToolKit /> },
                   ].map(d => {
                     return (
                       <Link

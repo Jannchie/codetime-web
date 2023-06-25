@@ -123,6 +123,7 @@ export function ThemePanel () {
             ]}
             getKey={(d) => d.label}
             setValue={d => {
+              document.cookie = `NEXT_LOCALE=${d.lang};path=/;max-age=31536000`
               router.push(pathname.replace(locate, d.lang), {
                 replace: true,
               })

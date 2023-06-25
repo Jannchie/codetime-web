@@ -78,7 +78,7 @@ export function ShieldPanel ({ uid }: { uid: number }) {
         gap="1rem"
       >
         <img
-          alt={t('shield')}
+          alt={t('shield').join('')}
           src={link}
         />
         <Flex
@@ -103,13 +103,13 @@ export function ShieldPanel ({ uid }: { uid: number }) {
             style={{ flexGrow: 1 }}
             value={obj.project}
             setValue={(v) => { setObj({ ...obj, project: v }) }}
-            placeholder={t('project')}
+            placeholder={t('project').join('')}
           />
           <TextField
             style={{ flexGrow: 1 }}
             value={obj.days}
             setValue={(v) => { setObj({ ...obj, days: v }) }}
-            placeholder={t('days')}
+            placeholder={t('days').join('')}
           />
           <Select
             color="primary"
@@ -123,7 +123,7 @@ export function ShieldPanel ({ uid }: { uid: number }) {
             style={{ flexGrow: 1 }}
             value={obj.color}
             setValue={(v) => { setObj({ ...obj, color: v }) }}
-            placeholder={t('color')}
+            placeholder={t('color').join('')}
           />
         </Flex>
       </Flex>
