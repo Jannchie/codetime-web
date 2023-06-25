@@ -8,10 +8,8 @@ import {
   Panel,
   Btn,
   Anchor,
-  useTheme,
   Modal,
   Select,
-  ToggleGroup,
   ThemeToggle,
 } from 'roku-ui'
 import { deleteRecords, useMutationFetch, useUserData } from '../../api'
@@ -86,7 +84,6 @@ export function TokenPanel () {
 }
 
 export function ThemePanel () {
-  const { theme, setTheme } = useTheme()
   const { t } = useI18n()
   const { lang: locate } = useParams()
   const router = useRouter()
@@ -112,12 +109,6 @@ export function ThemePanel () {
         <div>
           <div className="text-lg">{ t('themes') }</div>
           <ThemeToggle />
-          <ToggleGroup
-            value={theme}
-            setValue={setTheme}
-            data={['dark', 'light', 'system']}
-            body={(d) => t(d)}
-          />
         </div>
         <div className="text-lg">{ t('languages') }</div>
         <div>
