@@ -113,7 +113,7 @@ export function ThemePanel () {
         <div className="text-lg">{ t('languages') }</div>
         <div>
           <Select<{ lang: string, label: string }>
-            defaultValue={{ lang: locate, label: getKey(locate) }}
+            defaultValue={{ lang: locate, label: getKey(locate).join('') }}
             options={[
               { lang: 'en', label: 'English' },
               { lang: 'zh-CN', label: '简体中文' },

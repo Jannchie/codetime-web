@@ -1,4 +1,6 @@
 {
+  "noData": "没有数据",
+  "noDataDesc": "目前，我们还没有收到你的编码时间记录。我们的应用程序依赖于编辑器插件，所以我们请你转到 ((settings)) 页面并将令牌复制到插件中。",
   "documentTitle": "CodeTime - 追迹你的编程时长",
   "signInGithub": "使用 Github 登录",
   "freeNoCard": "免费使用，无需信用卡。",

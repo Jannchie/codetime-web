@@ -1,4 +1,6 @@
 {
+  "noData": "Nenhum dado",
+  "noDataDesc": "No momento, não há registros de tempo de codificação. Como o aplicativo depende de plugins de editor, vá para a página ((settings)) e copie o token para o plugin.",
   "documentTitle": "CodeTime - Rastreie seu tempo de codificação",
   "signInGithub": "Entrar com Github",
   "freeNoCard": "Grátis para todos. Não é necessário cartão de crédito.",

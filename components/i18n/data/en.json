@@ -1,4 +1,6 @@
 {
+  "noData": "No data",
+  "noDataDesc": "At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the ((settings)) page and copy the token into the plugin.",
   "documentTitle": "CodeTime - Trekking Your Coding Time",
   "signInGithub": "Sign in with Github",
   "freeNoCard": "Free for everyone. No credit card required.",

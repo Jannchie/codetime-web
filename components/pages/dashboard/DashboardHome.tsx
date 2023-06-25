@@ -187,9 +187,9 @@ export function DaysComponent () {
           data={[1, 7, 30]}
           body={(d) => {
             switch (d) {
-              case 1: return t('last24hours')
-              case 7: return t('last7days')
-              case 30: return t('last30days')
+              case 1: { return t('last24hours') }
+              case 7: { return t('last7days') }
+              case 30: { return t('last30days') }
             }
           }}
         />
@@ -459,19 +459,23 @@ export function DashboardHome () {
   return (
     <Container style={{ padding: '1rem' }}>
       { data.data && data.data.data.length === 0 && <Notice
+        border
+        className="mb-4"
         icon={<CarbonInformation width="20px" />}
         color="warning"
-        title="No Data"
+        title={t('noData')}
         desc={<>
-          At this time, we have not received a record of your coding time. Our application is dependent on the editor plugin, so we kindly ask you to navigate to the
-          { ' ' }
-          <Link
-            href={'/dashboard/setting'}
-          >
-            settings
-          </Link>
-          { ' ' }
-          page and copy the token into the plugin.
+          {
+            t('noDataDesc', {
+              settings: <Link
+                key="settings"
+                className="hover:text-primary-2 underline decoration-primary-2"
+                href={'/dashboard/setting'}
+              >
+                { t('settings') }
+              </Link>,
+            })
+          }
         </>}
       /> }
       <T.H1 className="monospace mb-4">
