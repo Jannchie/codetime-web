@@ -470,7 +470,7 @@ export function DashboardHome () {
               settings: <Link
                 key="settings"
                 className="hover:text-primary-2 underline decoration-primary-2"
-                href={'/dashboard/setting'}
+                href={'/dashboard/settings'}
               >
                 { t('settings') }
               </Link>,
