@@ -270,6 +270,7 @@ function LogoutPanel () {
 
 export function ExportPanel () {
   const exportMutation = useRecordExportMutation()
+  const { t } = useI18n()
   return (
     <Panel
       border
@@ -298,11 +299,16 @@ export function ExportPanel () {
             a.click()
           })
         }}
-      >
+        >
         <Flex gap="0.5rem">
-          { 'Export' }
+          { t('export') }
         </Flex>
       </Btn>
+      <div
+        className='text-frontground-3 text-sm mt-2'
+      >
+        { t('exportDesc') }
+      </div>
     </Panel>
   )
 }

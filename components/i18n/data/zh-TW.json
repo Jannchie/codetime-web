@@ -52,5 +52,7 @@
   "ja": "日語",
   "preferences": "偏好",
   "contributeProject": "如果沒有您使用的語言，為什麼不參與並貢獻給這個專案？",
+  "export": "匯出",
+  "exportDesc": "你可以匯出 Codetime 中存儲的所有資料，並隨時離開。",
   "": ""
 }

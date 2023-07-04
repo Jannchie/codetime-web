@@ -52,5 +52,7 @@
   "ja": "Japonês",
   "preferences": "Preferências",
   "contributeProject": "Se não houver nenhum idioma que você use, por que não se envolver e contribuir para o projeto? ",
+  "export": "Exportar",
+  "exportDesc": "Você pode baixar todos os dados armazenados no Codetime e sair a qualquer momento.",
   "": ""
 }
