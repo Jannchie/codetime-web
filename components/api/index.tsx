@@ -3,16 +3,31 @@ import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 export const baseURL = process.env.NEXT_PUBLIC_API_BASE_URL ?? 'http://api.codetime.dev:8080'
 
+export function useRecordExportMutation () {
+  return useMutationFetch<string>('/user/records/export', {
+    method: 'POST',
+  })
+}
+
 export function useMutationFetch<D> (url: string, options: RequestInit = {}) {
   options.credentials = 'include'
   const finalURL = `${baseURL}${url}`
   return useSWRMutation<D>(finalURL, async () => {
     const res = await fetch(baseURL + url, options)
-    const data = await res.json()
-    if (res.status !== 200) {
-      throw new Error(data.error)
+    // if is json
+    if (res.headers.get('content-type')?.includes('application/json')) {
+      const data = await res.json()
+      if (res.status !== 200) {
+        throw new Error(data.error)
+      }
+      return data
+    } else if (res.headers.get('content-type')?.includes('text/csv')) {
+      const data = await res.text()
+      if (res.status !== 200) {
+        throw new Error(data)
+      }
+      return data
     }
-    return data
   }, { })
 }
 

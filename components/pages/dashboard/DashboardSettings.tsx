@@ -12,11 +12,11 @@ import {
   Select,
   ThemeToggle,
 } from 'roku-ui'
-import { deleteRecords, useMutationFetch, useUserData } from '../../api'
-import { CarbonCut, CarbonLogout, CarbonTrashCan } from '@roku-ui/icons-carbon'
+import { deleteRecords, useMutationFetch, useRecordExportMutation, useUserData } from '../../api'
 import { useI18n } from '../../i18n'
 import { useDebounce } from 'usehooks-ts'
 import { useParams, usePathname, useRouter } from 'next/navigation'
+import { TablerCut, TablerDownload, TablerLogout, TablerTrash } from '@roku-ui/icons-tabler'
 export function TokenPanel () {
   const user = useUserData()
   const [hover, setHover] = useState(false)
@@ -46,6 +46,7 @@ export function TokenPanel () {
               onMouseLeave={() => { setHover(false) }}
             />
             <Btn
+              leadingIcon={<TablerCut />}
               onClick={() => {
                 void navigator.clipboard.writeText(
                   user.data?.upload_token ?? '',
@@ -57,15 +58,7 @@ export function TokenPanel () {
                 })
               }}
             >
-              <Flex
-                align="center"
-                gap="0.25rem"
-              >
-                <CarbonCut width="20px" />
-                <span>
-                  { t('copy') }
-                </span>
-              </Flex>
+              { t('copy') }
             </Btn>
           </Flex>
           <div
@@ -173,14 +166,12 @@ function DangerPanel () {
       </div>
       <Btn
         color="danger"
+        leadingIcon={<TablerTrash />}
         onClick={() => {
           setShowModal(true)
         }}
       >
-        <Flex gap="0.5rem">
-          <CarbonTrashCan width="1em" />
-          { t('destroyRecords') }
-        </Flex>
+        { t('destroyRecords') }
       </Btn>
       <Modal
         backgroundBlur
@@ -264,15 +255,52 @@ function LogoutPanel () {
       </div>
       <Btn
         color="primary"
+        leadingIcon={ <TablerLogout />}
         onClick={() => {
           void res.trigger().then(() => {
             window.location.reload()
           })
         }}
       >
+        { t('logout') }
+      </Btn>
+    </Panel>
+  )
+}
+
+export function ExportPanel () {
+  const exportMutation = useRecordExportMutation()
+  return (
+    <Panel
+      border
+      style={{ padding: '1rem' }}
+    >
+      <div
+        className="monospace"
+        style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}
+      >
+        { 'Export' }
+      </div>
+      <Btn
+        loading={exportMutation.isMutating}
+        color="primary"
+        leadingIcon={<TablerDownload />}
+        onClick={() => {
+          if (exportMutation.isMutating) return
+          void exportMutation.trigger().then((data) => {
+            // download file
+            // data is string of csv
+            const blob = new Blob([data], { type: 'text/csv' })
+            const url = window.URL.createObjectURL(blob)
+            const a = document.createElement('a')
+            a.href = url
+            a.download = `records-${new Date().toISOString()}.csv`
+            a.click()
+          })
+        }}
+      >
         <Flex gap="0.5rem">
-          <CarbonLogout width="1em" />
-          { t('logout') }
+          { 'Export' }
         </Flex>
       </Btn>
     </Panel>
@@ -291,6 +319,7 @@ export function DashboardSettings () {
       >
         <TokenPanel />
         <ThemePanel />
+        <ExportPanel />
         <DangerPanel />
         <LogoutPanel />
       </Flex>
