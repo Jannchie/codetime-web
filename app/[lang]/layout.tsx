@@ -7,6 +7,7 @@ import ptBR from '../../components/i18n/data/pt-BR.json'
 import { cookies } from 'next/dist/client/components/headers'
 import { Provider } from './provider'
 import { type Metadata } from 'next'
+import Script from 'next/script'
 
 export type localeTypes = 'en' | 'ja' | 'zh-CN' | 'zh-TW' | 'pt-BR'
 export const locales = ['en', 'zh-CN', 'zh-TW', 'ja', 'pt-BR']
@@ -107,6 +108,16 @@ export default function Layout ({
       lang={lang}
       data-theme={cookieTheme}
     >
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-36N091FBKT" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-36N091FBKT');
+        `}
+      </Script>
       <body className="h-screen">
         <I18nProvider data={data}>
           <Provider>
