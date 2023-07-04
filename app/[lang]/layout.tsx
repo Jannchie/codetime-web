@@ -69,7 +69,8 @@ export async function generateMetadata (
       name: 'Jannchie',
     }, {
       name: 'Si9ma',
-    }],
+      }],
+    icons: ['/icon.svg'],
     keywords: 'CodeTime, time tracking, programming, programmer, coding, time, track, productivity, motivation, achievement, Wakatime',
     openGraph: {
       title,
