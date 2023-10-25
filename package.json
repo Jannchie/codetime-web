@@ -19,7 +19,7 @@
     "date-fns": "^2.30.0",
     "markdown-to-jsx": "^7.2.1",
     "negotiator": "^0.6.3",
-    "next": "^13.4.8",
+    "next": "^13.5.0",
     "postcss": "^8.4.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
