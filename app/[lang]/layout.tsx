@@ -4,13 +4,14 @@ import ja from '../../components/i18n/data/ja.json'
 import zhCN from '../../components/i18n/data/zh-CN.json'
 import zhTW from '../../components/i18n/data/zh-TW.json'
 import ptBR from '../../components/i18n/data/pt-BR.json'
+import it from '../../components/i18n/data/it.json'
 import { cookies } from 'next/dist/client/components/headers'
 import { Provider } from './provider'
 import { type Metadata } from 'next'
 import Script from 'next/script'
 
-export type localeTypes = 'en' | 'ja' | 'zh-CN' | 'zh-TW' | 'pt-BR'
-export const locales = ['en', 'zh-CN', 'zh-TW', 'ja', 'pt-BR']
+export type localeTypes = 'en' | 'ja' | 'zh-CN' | 'zh-TW' | 'pt-BR' | 'it'
+export const locales = ['en', 'zh-CN', 'zh-TW', 'ja', 'pt-BR', 'it']
 export function getData (locale: string) {
   switch (locale) {
     case 'en':
@@ -23,6 +24,8 @@ export function getData (locale: string) {
       return zhTW
     case 'pt-BR':
       return ptBR
+    case 'it':
+      return it
     default:
       return en
   }
